@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cauce Consultora</title>
+  <meta name="description" content="Cauce Consultora: consultora de sistemas. Diagnóstico, plan de acción y acompañamiento para que las empresas ordenen sus sistemas y ganen valor.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;1,300&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --piedra: #EDF0EC;      /* fondo */
+      --superficie: #F8FAF7;
+      --agua: #1F4E5A;        /* color principal */
+      --agua-clara: #3F7A86;
+      --junco: #B7C6B2;       /* acento suave */
+      --tinta: #1C2824;       /* texto */
+      --limo: #56645D;        /* texto secundario */
+      --serif: "Spectral", Georgia, serif;
+      --sans: "Figtree", system-ui, sans-serif;
+      --ancho: 68rem;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--piedra);
+      color: var(--tinta);
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    :focus-visible {
+      outline: 2px solid var(--agua-clara);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .contenedor {
+      max-width: var(--ancho);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ---------- Navegación ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(237, 240, 236, 0.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .nav .contenedor {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.25rem;
+    }
+    .marca {
+      font-family: var(--serif);
+      font-size: 1.375rem;
+      font-weight: 400;
+      text-decoration: none;
+      color: var(--agua);
+      letter-spacing: 0.01em;
+    }
+    .nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav ul a {
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--limo);
+      transition: color 0.2s;
+    }
+    .nav ul a:hover { color: var(--agua); }
+
+    /* ---------- Inicio ---------- */
+    .inicio {
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 0 11rem;
+    }
+    .inicio .rio {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 9rem;
+      pointer-events: none;
+    }
+    .rio path {
+      fill: none;
+      stroke: var(--junco);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+    .rio path.principal {
+      stroke: var(--agua-clara);
+      stroke-width: 2;
+      opacity: 0.55;
+      stroke-dasharray: 2400;
+      stroke-dashoffset: 2400;
+      animation: correr 3.2s ease-out 0.2s forwards;
+    }
+    @keyframes correr { to { stroke-dashoffset: 0; } }
+
+    .inicio .contenedor { position: relative; }
+
+    .inicio h1 {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5.6vw, 4.25rem);
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      color: var(--agua);
+      max-width: 15em;
+    }
+    .inicio .bajada {
+      margin-top: 1.75rem;
+      max-width: 34rem;
+      font-size: 1.15rem;
+      color: var(--limo);
+    }
+    .boton {
+      display: inline-block;
+      margin-top: 2.5rem;
+      padding: 0.85rem 1.6rem;
+      background: var(--agua);
+      color: var(--superficie);
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+    .boton:hover { background: var(--agua-clara); }
+
+    /* ---------- Secciones ---------- */
+    section { scroll-margin-top: 4.25rem; }
+
+    .seccion { padding: 6rem 0; }
+
+    .seccion h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+      line-height: 1.2;
+      color: var(--agua);
+    }
+    .seccion .intro {
+      margin-top: 1rem;
+      max-width: 36rem;
+      color: var(--limo);
+    }
+
+    /* Servicios: tres etapas unidas por una misma línea */
+    .servicios { background: var(--superficie); }
+
+    .etapas {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+      margin-top: 4rem;
+      list-style: none;
+    }
+    .etapas::before {
+      content: "";
+      position: absolute;
+      top: 0.55rem;
+      left: 0.55rem;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--agua-clara), var(--junco));
+      border-radius: 2px;
+    }
+    .etapa { position: relative; padding-top: 2.5rem; }
+    .etapa::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1.1rem;
+      height: 1.1rem;
+      border-radius: 50%;
+      background: var(--superficie);
+      border: 2px solid var(--agua);
+    }
+    .etapa h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.45rem;
+      line-height: 1.25;
+      color: var(--tinta);
+    }
+    .etapa p {
+      margin-top: 0.75rem;
+      color: var(--limo);
+    }
+
+    /* Quiénes somos */
+    .quienes .contenedor {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .quienes .texto p + p { margin-top: 1.1rem; }
+    .quienes .texto p { color: var(--limo); max-width: 38rem; }
+
+    .caso {
+      margin-top: 2.5rem;
+      padding: 1.75rem 2rem;
+      background: var(--superficie);
+      border-left: 3px solid var(--agua);
+      border-radius: 0 10px 10px 0;
+    }
+    .caso h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--agua);
+    }
+    .caso p { margin-top: 0.6rem; }
+
+    /* ---------- Pie ---------- */
+    footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--junco);
+      font-size: 0.9rem;
+      color: var(--limo);
+    }
+    footer .contenedor {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ---------- Celular ---------- */
+    @media (max-width: 760px) {
+      .nav ul { gap: 1.1rem; }
+      .nav ul a { font-size: 0.875rem; }
+      .marca { font-size: 1.2rem; }
+      .inicio { padding: 4.5rem 0 8rem; }
+      .seccion { padding: 4.5rem 0; }
+
+      .etapas {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding-left: 2.25rem;
+      }
+      .etapas::before {
+        top: 0.55rem;
+        bottom: 0;
+        left: 0.5rem;
+        right: auto;
+        width: 2px;
+        height: auto;
+        background: linear-gradient(to bottom, var(--agua-clara), var(--junco));
+      }
+      .etapa { padding-top: 0; }
+      .etapa::before { left: -2.25rem; top: 0.35rem; }
+
+      .quienes .contenedor { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    @media (max-width: 420px) {
+      .nav .contenedor { flex-direction: column; justify-content: center; gap: 0.25rem; height: auto; padding-top: 0.75rem; padding-bottom: 0.75rem; }
+      section { scroll-margin-top: 5.5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .rio path.principal { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="contenedor">
+      <a href="#inicio" class="marca">Cauce</a>
+      <nav aria-label="Secciones">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#quienes-somos">Quiénes somos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="inicio">
+      <svg class="rio" viewBox="0 0 1200 160" preserveAspectRatio="none" aria-hidden="true">
+        <path class="principal" vector-effect="non-scaling-stroke" d="M-40 110 C 180 95, 260 35, 470 50 S 760 120, 930 70 S 1150 15, 1260 25"/>
+        <path vector-effect="non-scaling-stroke" d="M-40 130 C 200 115, 280 60, 480 75 S 770 140, 950 95 S 1160 40, 1260 50" opacity="0.6"/>
+        <path vector-effect="non-scaling-stroke" d="M-40 150 C 220 138, 300 85, 500 100 S 780 158, 970 118 S 1170 65, 1260 75" opacity="0.35"/>
+      </svg>
+      <div class="contenedor">
+        <h1>Ordenamos los sistemas de una empresa para que su valor se vea con claridad.</h1>
+        <p class="bajada">Somos una consultora de sistemas. Analizamos cómo funciona tu organización, encontramos lo que la frena y te proponemos un camino concreto para mejorarla.</p>
+        <a href="#servicios" class="boton">Ver cómo trabajamos</a>
+      </div>
+    </section>
+
+    <section id="servicios" class="seccion servicios">
+      <div class="contenedor">
+        <h2>Servicios</h2>
+        <p class="intro">Trabajamos en tres etapas. Cada una deja algo concreto en manos de la empresa.</p>
+        <ol class="etapas">
+          <li class="etapa">
+            <h3>Diagnóstico</h3>
+            <p>Relevamos procesos, sistemas e información. Entendemos qué depende de las personas, qué está documentado y dónde se pierde tiempo o valor.</p>
+          </li>
+          <li class="etapa">
+            <h3>Plan de acción</h3>
+            <p>Convertimos el diagnóstico en una propuesta priorizada: qué cambiar, en qué orden, con qué recursos y qué resultado esperar de cada paso.</p>
+          </li>
+          <li class="etapa">
+            <h3>Acompañamiento</h3>
+            <p>La empresa implementa y nosotros estamos cerca: resolvemos dudas, ajustamos el plan y medimos el avance.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="quienes-somos" class="seccion quienes">
+      <div class="contenedor">
+        <h2>Quiénes somos</h2>
+        <div class="texto">
+          <p>Cauce es un equipo de consultores en sistemas de información. Nos interesa entender cómo funciona cada organización por dentro: cómo circula la información, cómo se toman las decisiones y qué tan preparada está para crecer o cambiar de manos.</p>
+          <p>Nuestro nombre viene de esa idea. Un cauce no cambia el agua, le da dirección. Eso buscamos con cada empresa: ordenar lo que ya tiene para que pueda avanzar.</p>
+
+          <div class="caso">
+            <h3>Proyecto actual: Orann</h3>
+            <p>Los dueños de Orann se preparan para retirarse y vender la empresa. Nos convocaron para hacer un diagnóstico y diseñar un plan de acción que ellos puedan implementar, con un objetivo claro: entregar la empresa al mayor valor posible.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <span>Cauce Consultora</span>
+      <span>© 2026</span>
+    </div>
+  </footer>
+
+</body>
+</html>
