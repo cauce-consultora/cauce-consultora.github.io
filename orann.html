@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proyecto Orann | Cauce Consultora</title>
+  <meta name="description" content="El caso Orann etapa por etapa: diagnóstico, arquitectura empresarial actual y destino, brechas, alcance y evaluación de soluciones.">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;1,300&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Misma paleta y tipografía que index.html */
+    :root {
+      --piedra: #F6EEE4;
+      --superficie: #FBF7F1;
+      --agua: #1F2A44;
+      --agua-clara: #E3795B;
+      --junco: #D9918F;
+      --durazno: #F2B79A;
+      --tinta: #1F2A44;
+      --limo: #565B6A;
+      --serif: "Spectral", Georgia, serif;
+      --sans: "Figtree", system-ui, sans-serif;
+      --ancho: 68rem;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--piedra);
+      color: var(--tinta);
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--agua-clara); outline-offset: 3px; border-radius: 2px; }
+    .contenedor { max-width: var(--ancho); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ---------- Navegación (igual a la home) ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(246, 238, 228, 0.9);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .nav .contenedor { display: flex; align-items: center; justify-content: space-between; height: 4.25rem; }
+    .marca {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 1.3rem; font-weight: 600; letter-spacing: 0.06em;
+      text-decoration: none; color: var(--agua);
+    }
+    .marca img { height: 1.9rem; width: auto; display: block; }
+    .nav ul { display: flex; gap: 2rem; list-style: none; }
+    .nav ul a { text-decoration: none; font-size: 0.95rem; font-weight: 500; color: var(--limo); transition: color 0.2s; }
+    .nav ul a:hover, .nav ul a[aria-current] { color: var(--agua); }
+
+    /* ---------- Portada del caso ---------- */
+    .portada { padding: 5.5rem 0 4rem; }
+    .volanta {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--agua-clara);
+    }
+    .portada h1 {
+      margin-top: 0.75rem;
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(2.3rem, 5vw, 3.8rem); line-height: 1.12; letter-spacing: -0.015em;
+      color: var(--agua); max-width: 16em;
+    }
+    .portada .bajada { margin-top: 1.5rem; max-width: 40rem; font-size: 1.12rem; color: var(--limo); }
+
+    .cifras {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+      margin-top: 3rem; list-style: none;
+    }
+    .cifras li { border-top: 2px solid var(--junco); padding-top: 0.9rem; }
+    .cifras strong {
+      display: block; font-family: var(--serif); font-weight: 400;
+      font-size: 2.1rem; line-height: 1.1; color: var(--agua);
+    }
+    .cifras span { font-size: 0.92rem; color: var(--limo); }
+
+    /* ---------- Recorrido de etapas ---------- */
+    .recorrido { background: var(--agua); color: var(--superficie); padding: 3rem 0; }
+    .recorrido h2 { font-family: var(--serif); font-weight: 400; font-size: 1.6rem; }
+    .recorrido p.nota { margin-top: 0.4rem; color: #C9CCD6; font-size: 0.95rem; }
+    .etapas-lista {
+      list-style: none; margin-top: 1.75rem;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr)); gap: 0.6rem;
+    }
+    .etapas-lista a {
+      display: block; height: 100%;
+      padding: 0.85rem 1rem; border-radius: 10px;
+      background: rgba(251, 247, 241, 0.06); border: 1px solid rgba(251, 247, 241, 0.14);
+      text-decoration: none; transition: background 0.2s, border-color 0.2s;
+    }
+    .etapas-lista a:hover { background: rgba(251, 247, 241, 0.12); border-color: var(--durazno); }
+    .etapas-lista .num { font-size: 0.8rem; font-weight: 600; color: var(--durazno); letter-spacing: 0.08em; }
+    .etapas-lista .tit { display: block; margin-top: 0.15rem; font-weight: 500; line-height: 1.35; }
+    .estado {
+      display: inline-block; margin-top: 0.5rem;
+      font-size: 0.75rem; font-weight: 600; padding: 0.1rem 0.55rem; border-radius: 999px;
+    }
+    .estado.listo { background: rgba(242, 183, 154, 0.2); color: var(--durazno); }
+    .estado.curso { background: rgba(227, 121, 91, 0.28); color: #FFD9CB; }
+    .estado.prox { background: rgba(251, 247, 241, 0.1); color: #C9CCD6; }
+    .etapas-lista li.pendiente a { border-style: dashed; }
+
+    /* ---------- Secciones ---------- */
+    section { scroll-margin-top: 4.5rem; }
+    .seccion { padding: 5rem 0; }
+    .seccion.clara { background: var(--superficie); }
+    .seccion h2 {
+      margin-top: 0.4rem;
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(1.8rem, 3.2vw, 2.4rem); line-height: 1.2; color: var(--agua);
+    }
+    .seccion .intro { margin-top: 1rem; max-width: 42rem; color: var(--limo); }
+    .seccion h3 {
+      font-family: var(--serif); font-weight: 400; font-size: 1.3rem; line-height: 1.3; color: var(--agua);
+    }
+    .bloque { margin-top: 3rem; }
+    .bloque > h3 + * { margin-top: 1rem; }
+    p.texto { color: var(--limo); max-width: 42rem; }
+    p.texto + p.texto { margin-top: 0.9rem; }
+
+    .grilla { display: grid; gap: 1rem; list-style: none; }
+    .g2 { grid-template-columns: repeat(2, 1fr); }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    .g4 { grid-template-columns: repeat(4, 1fr); }
+
+    .tarjeta {
+      background: var(--superficie); border-radius: 12px; padding: 1.4rem 1.5rem;
+      border-top: 3px solid var(--durazno);
+    }
+    .seccion.clara .tarjeta { background: var(--piedra); }
+    .tarjeta.acento { border-top-color: var(--agua-clara); }
+    .tarjeta.oscura { background: var(--agua); color: var(--superficie); border-top-color: var(--agua-clara); }
+    .tarjeta.oscura p { color: #D5D8E0; }
+    .tarjeta h4 { font-size: 1.02rem; font-weight: 600; line-height: 1.35; }
+    .tarjeta p { margin-top: 0.5rem; font-size: 0.96rem; color: var(--limo); }
+    .tarjeta .meta { display: block; margin-top: 0.75rem; font-size: 0.85rem; font-weight: 500; color: var(--agua-clara); }
+    .etiqueta {
+      display: inline-block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--agua-clara);
+    }
+
+    ul.puntos { list-style: none; max-width: 44rem; }
+    ul.puntos li { position: relative; padding-left: 1.4rem; color: var(--limo); }
+    ul.puntos li + li { margin-top: 0.6rem; }
+    ul.puntos li::before {
+      content: ""; position: absolute; left: 0; top: 0.62em;
+      width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--agua-clara);
+    }
+    ul.puntos strong { color: var(--tinta); font-weight: 600; }
+
+    /* Madurez: dos miradas */
+    .miradas { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .nivel { font-family: var(--serif); font-size: 2.2rem; line-height: 1; color: var(--agua); }
+    .nivel small { font-family: var(--sans); font-size: 0.9rem; color: var(--limo); }
+
+    /* Cobertura de aplicaciones por proceso */
+    .cobertura { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem 2rem; max-width: 52rem; }
+    .cobertura li {
+      display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;
+      padding: 0.55rem 0; border-bottom: 1px solid rgba(86, 91, 106, 0.18); font-size: 0.96rem;
+    }
+    .cobertura .apps { font-size: 0.85rem; color: var(--limo); text-align: right; }
+    .cobertura li.manual .apps { color: var(--agua-clara); font-weight: 600; }
+    .leyenda { margin-top: 1rem; font-size: 0.9rem; color: var(--limo); }
+
+    /* Matriz de escenarios */
+    .matriz {
+      display: grid; grid-template-columns: auto 1fr 1fr; gap: 0.5rem;
+      max-width: 44rem; align-items: stretch;
+    }
+    .matriz .eje { font-size: 0.85rem; font-weight: 600; color: var(--limo); display: flex; align-items: center; }
+    .matriz .eje.col { justify-content: center; }
+    .celda {
+      background: var(--superficie); border-radius: 10px; padding: 1rem 1.1rem;
+      border: 1px solid rgba(86, 91, 106, 0.15);
+    }
+    .seccion.clara .celda { background: var(--piedra); }
+    .celda .nombre { font-weight: 600; font-size: 0.95rem; }
+    .celda .puntaje { font-family: var(--serif); font-size: 1.9rem; line-height: 1.1; color: var(--agua); margin-top: 0.3rem; }
+    .celda .puntaje small { font-family: var(--sans); font-size: 0.8rem; color: var(--limo); }
+    .celda.elegido { background: var(--agua) !important; color: var(--superficie); border-color: var(--agua); }
+    .celda.elegido .puntaje { color: var(--durazno); }
+    .celda.elegido .puntaje small { color: #C9CCD6; }
+
+    /* Secuencia */
+    ol.secuencia { list-style: none; counter-reset: paso; max-width: 44rem; }
+    ol.secuencia li {
+      counter-increment: paso; position: relative; padding: 0 0 1.25rem 3rem; color: var(--limo);
+    }
+    ol.secuencia li::before {
+      content: counter(paso); position: absolute; left: 0; top: 0;
+      width: 2rem; height: 2rem; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--superficie); border: 2px solid var(--agua);
+      font-weight: 600; font-size: 0.9rem; color: var(--agua);
+    }
+    .seccion.clara ol.secuencia li::before { background: var(--piedra); }
+    .seccion ol.secuencia li:first-child::before { background: var(--agua-clara); border-color: var(--agua-clara); color: var(--superficie); }
+    ol.secuencia strong { color: var(--tinta); font-weight: 600; }
+
+    /* Barras de madurez y ponderaciones */
+    .barras { max-width: 52rem; }
+    .barra-fila { display: grid; grid-template-columns: 15rem 1fr; gap: 1rem; align-items: center; padding: 0.55rem 0; }
+    .barra-fila + .barra-fila { border-top: 1px solid rgba(86, 91, 106, 0.12); }
+    .barra-fila .rotulo { font-size: 0.93rem; line-height: 1.3; }
+    .pistas { display: grid; gap: 4px; }
+    .pista { height: 0.6rem; background: rgba(86, 91, 106, 0.12); border-radius: 999px; overflow: hidden; }
+    .pista span { display: block; height: 100%; border-radius: 999px; }
+    .pista .act { background: var(--junco); }
+    .pista .tra { background: var(--agua-clara); }
+    .pista .des { background: var(--agua); }
+    .claves { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.25rem; font-size: 0.88rem; color: var(--limo); }
+    .claves span::before {
+      content: ""; display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 3px;
+      margin-right: 0.4rem; vertical-align: -1px; background: var(--c);
+    }
+
+    .pesos { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .pesos li { background: var(--superficie); border-radius: 12px; padding: 1.2rem 1.3rem; }
+    .seccion.clara .pesos li { background: var(--piedra); }
+    .pesos strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 2.2rem; line-height: 1; color: var(--agua); }
+    .pesos .nombre { display: block; margin-top: 0.4rem; font-weight: 600; }
+    .pesos p { margin-top: 0.35rem; font-size: 0.9rem; color: var(--limo); }
+
+    /* Cronograma */
+    .cronograma { list-style: none; max-width: 46rem; border-left: 2px solid var(--junco); margin-left: 0.4rem; }
+    .cronograma li { position: relative; padding: 0 0 1.4rem 1.6rem; }
+    .cronograma li::before {
+      content: ""; position: absolute; left: -0.45rem; top: 0.35rem;
+      width: 0.8rem; height: 0.8rem; border-radius: 50%; background: var(--superficie); border: 2px solid var(--agua);
+    }
+    .cronograma li.hecho::before { background: var(--agua); }
+    .cronograma li.ahora::before { background: var(--agua-clara); border-color: var(--agua-clara); }
+    .cronograma .fecha { font-size: 0.85rem; font-weight: 600; color: var(--agua-clara); }
+    .cronograma p { color: var(--limo); font-size: 0.96rem; }
+
+    /* Aviso de etapa en curso */
+    .aviso {
+      margin-top: 2rem; max-width: 44rem;
+      padding: 1.1rem 1.4rem; border-radius: 10px;
+      background: rgba(227, 121, 91, 0.1); border-left: 3px solid var(--agua-clara);
+      font-size: 0.96rem; color: var(--tinta);
+    }
+
+    /* Próximas etapas */
+    .proximas .tarjeta { border-top-style: dashed; background: transparent; border: 1px dashed var(--junco); }
+
+    /* ---------- Pie ---------- */
+    footer { padding: 2.5rem 0; border-top: 1px solid var(--junco); font-size: 0.9rem; color: var(--limo); }
+    footer .contenedor { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    footer a { color: var(--agua); }
+
+    /* ---------- Celular ---------- */
+    @media (max-width: 900px) {
+      .g4, .pesos { grid-template-columns: repeat(2, 1fr); }
+      .g3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 760px) {
+      .nav ul { gap: 0.85rem; }
+      .nav ul a { font-size: 0.875rem; }
+      .marca { font-size: 1.2rem; }
+      .marca img { height: 1.6rem; }
+      .portada { padding: 3.5rem 0 3rem; }
+      .seccion { padding: 3.75rem 0; }
+      .cifras { grid-template-columns: 1fr 1fr; }
+      .g2, .g3, .miradas, .cobertura { grid-template-columns: 1fr; }
+      .barra-fila { grid-template-columns: 1fr; gap: 0.4rem; }
+      .matriz { grid-template-columns: 1fr 1fr; }
+      .matriz .eje { display: none; }
+    }
+    @media (max-width: 420px) {
+      .nav .contenedor { flex-direction: column; justify-content: center; gap: 0.25rem; height: auto; padding-top: 0.75rem; padding-bottom: 0.75rem; }
+      section { scroll-margin-top: 6rem; }
+      .g4, .pesos { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="contenedor">
+      <a href="index.html" class="marca"><img src="img/logo-cauce.png" alt="" width="480" height="262">CAUCE</a>
+      <nav aria-label="Secciones">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="index.html#quienes-somos">Quiénes somos</a></li>
+          <li><a href="orann.html" aria-current="page">Proyecto Orann</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= Portada ================= -->
+    <section class="portada">
+      <div class="contenedor">
+        <span class="volanta">Caso de consultoría · 2026</span>
+        <h1>Orann: preparar una empresa familiar para que pueda cambiar de manos.</h1>
+        <p class="bajada">En el marco de la materia Actuación Profesional del Licenciado en Sistemas de Información, acompañamos a Orann en el análisis de su arquitectura empresarial y en la búsqueda de una solución que haga transferible el conocimiento que hoy sostiene la empresa.</p>
+        <ul class="cifras">
+          <li><strong>1994</strong><span>origen del emprendimiento, con más de 20 años de habilitación formal</span></li>
+          <li><strong>23</strong><span>personas trabajando en una única planta</span></li>
+          <li><strong>~150</strong><span>clientes y distribuidores en todo el país</span></li>
+          <li><strong>2–3 años</strong><span>plazo que se fijaron los dueños para la venta</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= Recorrido ================= -->
+    <section class="recorrido" aria-labelledby="titulo-recorrido">
+      <div class="contenedor">
+        <h2 id="titulo-recorrido">El proyecto, etapa por etapa</h2>
+        <p class="nota">Cada etapa corresponde a uno de los entregables del proyecto. Algunas siguen abiertas mientras esperamos información del cliente.</p>
+        <ol class="etapas-lista">
+          <li><a href="#diagnostico"><span class="num">ETAPA 1</span><span class="tit">Caso de negocio y relevamiento organizacional</span><span class="estado listo">Completa</span></a></li>
+          <li><a href="#actual"><span class="num">ETAPA 2</span><span class="tit">Arquitectura empresarial actual</span><span class="estado listo">Completa</span></a></li>
+          <li><a href="#destino"><span class="num">ETAPA 3</span><span class="tit">Visión de arquitectura destino</span><span class="estado listo">Completa</span></a></li>
+          <li><a href="#brechas"><span class="num">ETAPA 4</span><span class="tit">Brechas y análisis de escenarios</span><span class="estado listo">Completa</span></a></li>
+          <li><a href="#alcance"><span class="num">ETAPA 5</span><span class="tit">Alcance y mercado de soluciones</span><span class="estado listo">Completa</span></a></li>
+          <li><a href="#rfp"><span class="num">ETAPA 6</span><span class="tit">Matriz RFP</span><span class="estado curso">En curso</span></a></li>
+          <li class="pendiente"><a href="#proximas"><span class="num">ETAPA 7</span><span class="tit">Comparación de cumplimiento y evaluación económica</span><span class="estado prox">Próximamente</span></a></li>
+          <li class="pendiente"><a href="#proximas"><span class="num">ETAPA 8</span><span class="tit">Análisis de la propuesta comercial</span><span class="estado prox">Próximamente</span></a></li>
+          <li class="pendiente"><a href="#proximas"><span class="num">ETAPA 9</span><span class="tit">Oportunidad de innovación con IA generativa</span><span class="estado prox">Próximamente</span></a></li>
+          <li class="pendiente"><a href="#proximas"><span class="num">ETAPA 10</span><span class="tit">Diseño y validación de la solución de IA generativa</span><span class="estado prox">Próximamente</span></a></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= Etapa 1 ================= -->
+    <section id="diagnostico" class="seccion">
+      <div class="contenedor">
+        <span class="etiqueta">Etapa 1 · Caso de negocio y relevamiento</span>
+        <h2>Conocer a Orann</h2>
+        <p class="intro">Orann elabora de forma artesanal granolas y barritas a base de cereales, semillas y frutos secos, sin conservantes ni aditivos. Su nombre combina los de sus fundadores, Horacio y Ana. Vende a distribuidores mayoristas que abastecen a dietéticas y tiendas naturistas de todo el país.</p>
+
+        <div class="bloque">
+          <h3>Identidad</h3>
+          <ul class="grilla g3">
+            <li class="tarjeta"><h4>Misión</h4><p>Ofrecer un alimento saludable, genuino y con fórmulas equilibradas que complemente la dieta de sus consumidores.</p></li>
+            <li class="tarjeta"><h4>Visión</h4><p>Modernizar procesos y maquinaria clave, y mantener un catálogo amplio, para dejar la empresa en condiciones óptimas ante una futura venta o retiro.</p></li>
+            <li class="tarjeta"><h4>Valores</h4><p>Comunicación horizontal, estabilidad y trato cercano con el personal, continuidad familiar y responsabilidad social.</p></li>
+          </ul>
+          <p class="leyenda">La misión, la visión y los valores no están escritos en la empresa: los inferimos de las entrevistas con la Sponsor.</p>
+        </div>
+
+        <div class="bloque">
+          <h3>Objetivos estratégicos</h3>
+          <ul class="grilla g3">
+            <li class="tarjeta acento"><h4>Modernizar la máquina de corte de barritas</h4><p>Contar con la máquina modernizada, instalada y en funcionamiento.</p><span class="meta">Plazo: 6 meses</span></li>
+            <li class="tarjeta acento"><h4>Recuperar el nivel de ventas</h4><p>Recuperar el 30 % de ventas perdido por la caída del consumo.</p><span class="meta">Plazo: 6 meses (propuesto por el equipo)</span></li>
+            <li class="tarjeta acento"><h4>Preparar la empresa para la venta</h4><p>Procesos clave documentados, registros al día y carpeta de venta lista para presentar a compradores.</p><span class="meta">Carpeta en 6 meses · venta en 2 a 3 años</span></li>
+          </ul>
+        </div>
+
+        <div class="bloque">
+          <h3>Qué encontramos</h3>
+          <ul class="puntos">
+            <li><strong>Una máquina que frena la producción.</strong> El corte de barritas necesita modernizarse para ganar tiempo y calidad.</li>
+            <li><strong>Ventas en baja.</strong> Una caída cercana al 30 % atribuida al contexto económico, aunque hay señales recientes de reactivación.</li>
+            <li><strong>Conocimiento sin documentar.</strong> La empresa quiere venderse en 2 a 3 años, pero todavía no tiene sus procesos documentados ni una carpeta de venta.</li>
+            <li><strong>Una gestión que busca el relevo.</strong> Tras décadas al frente, los dueños necesitan apoyo para liderar el cambio.</li>
+          </ul>
+        </div>
+
+        <div class="bloque">
+          <h3>Madurez organizacional: dos miradas</h3>
+          <div class="miradas">
+            <div class="tarjeta"><span class="nivel">3 <small>Definido</small></span><h4 style="margin-top:.6rem">Área sanitaria y bromatológica</h4><p>Más de 20 años de habilitación oficial, con higiene, seguridad y trazabilidad por lote documentadas en manuales y carpetas.</p></div>
+            <div class="tarjeta acento"><span class="nivel">2 <small>Repetible</small></span><h4 style="margin-top:.6rem">Gestión de datos y sistemas</h4><p>El día a día funciona, pero la continuidad depende de proveedores externos sin respaldo contractual ni capacidad técnica propia.</p></div>
+          </div>
+          <p class="texto" style="margin-top:1rem">La mirada de la Sponsor coincide con la nuestra en lo sanitario. En sistemas, su percepción resultó más optimista que lo que mostró el relevamiento técnico.</p>
+        </div>
+
+        <div class="bloque">
+          <h3>Historias de usuario priorizadas</h3>
+          <ul class="grilla g2">
+            <li class="tarjeta acento"><span class="etiqueta">Must have</span><h4>Máquina de corte modernizada</h4><p>Para disminuir tiempos de trabajo y reducir la merma.</p></li>
+            <li class="tarjeta acento"><span class="etiqueta">Must have</span><h4>Recuperar el volumen de ventas</h4><p>Para estabilizar la operación y mejorar la rentabilidad.</p></li>
+            <li class="tarjeta acento"><span class="etiqueta">Must have</span><h4>Procesos documentados y registros ordenados</h4><p>Para presentar una empresa atractiva a compradores. Es el eje de nuestra propuesta.</p></li>
+            <li class="tarjeta"><span class="etiqueta">Should have</span><h4>Documentar el valor diferencial</h4><p>Historia, marca y cultura, para que la carpeta de venta refleje ese valor.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Etapa 2 ================= -->
+    <section id="actual" class="seccion clara">
+      <div class="contenedor">
+        <span class="etiqueta">Etapa 2 · Arquitectura empresarial actual</span>
+        <h2>Cómo funciona Orann hoy</h2>
+        <p class="intro">Relevamos los cuatro dominios de la arquitectura: negocio, datos, aplicaciones y tecnología. El hallazgo central es que la tecnología acompaña la administración y la relación con clientes, pero no la producción.</p>
+
+        <div class="bloque">
+          <ul class="grilla g4">
+            <li class="tarjeta"><span class="etiqueta">01 · Negocio</span><h4 style="margin-top:.4rem">13 procesos en tres capas</h4><p>Uno estratégico (Dirección General), ocho operativos, desde la recepción de materia prima hasta los reclamos, y cuatro de apoyo.</p></li>
+            <li class="tarjeta"><span class="etiqueta">02 · Datos</span><h4 style="margin-top:.4rem">Información repartida</h4><p>Un sistema de gestión central convive con planillas Excel y un cuaderno en papel. La trazabilidad de cada lote se escribe dos veces.</p></li>
+            <li class="tarjeta"><span class="etiqueta">03 · Aplicaciones</span><h4 style="margin-top:.4rem">Un ERP recién migrado</h4><p>Pasaron de un sistema a medida sin soporte a un ERP en la nube, que ya opera en producción pero sin contrato firmado.</p></li>
+            <li class="tarjeta"><span class="etiqueta">04 · Tecnología</span><h4 style="margin-top:.4rem">Infraestructura mínima</h4><p>Pocos equipos, sin política formal de respaldo y sin nadie en la empresa con capacidad técnica para sostener los sistemas.</p></li>
+          </ul>
+        </div>
+
+        <div class="bloque">
+          <h3>¿Qué procesos tienen una aplicación detrás?</h3>
+          <ul class="cobertura">
+            <li><span>Dirección General</span><span class="apps">ERP</span></li>
+            <li class="manual"><span>Recepción de materia prima</span><span class="apps">Manual</span></li>
+            <li class="manual"><span>Almacenamiento y pesaje</span><span class="apps">Manual</span></li>
+            <li class="manual"><span>Elaboración</span><span class="apps">Manual</span></li>
+            <li class="manual"><span>Empaque</span><span class="apps">Manual</span></li>
+            <li><span>Comunicación con clientes</span><span class="apps">Email, web, Instagram, Facebook</span></li>
+            <li><span>Facturación y remito</span><span class="apps">ERP</span></li>
+            <li class="manual"><span>Despacho de pedidos</span><span class="apps">Manual</span></li>
+            <li><span>Reclamos y cambios</span><span class="apps">ERP, email</span></li>
+            <li class="manual"><span>Mantenimiento</span><span class="apps">Manual</span></li>
+            <li><span>Control de acceso</span><span class="apps">Biométrico</span></li>
+            <li><span>Comunicación interna</span><span class="apps">WhatsApp y cuaderno</span></li>
+            <li><span>Gestión contable-administrativa</span><span class="apps">ERP, Excel</span></li>
+          </ul>
+          <p class="leyenda">Toda la cadena productiva, del ingreso de la materia prima al despacho, funciona sin ningún sistema que la registre.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Etapa 3 ================= -->
+    <section id="destino" class="seccion">
+      <div class="contenedor">
+        <span class="etiqueta">Etapa 3 · Visión de arquitectura destino</span>
+        <h2>Hacia dónde puede ir</h2>
+        <p class="intro">Usamos el modelo de los diez tipos de innovación de Doblin para pensar la Orann de dentro de dos o tres años: una empresa que un nuevo dueño pueda operar sin depender de sus fundadores, con más de una fuente de ingresos.</p>
+
+        <div class="bloque">
+          <ul class="grilla g3">
+            <li class="tarjeta">
+              <span class="etiqueta">Configuración</span>
+              <ul class="puntos" style="margin-top:.8rem">
+                <li>Venta directa al consumidor con e-commerce y suscripción mensual</li>
+                <li>Servicios de maquila, aprovechando la capacidad ociosa de la planta</li>
+                <li>Trazabilidad digital en un único registro</li>
+                <li>Tablero de costos y ventas para la dirección</li>
+                <li>Documentar el conocimiento de los dueños</li>
+              </ul>
+            </li>
+            <li class="tarjeta">
+              <span class="etiqueta">Oferta</span>
+              <ul class="puntos" style="margin-top:.8rem">
+                <li>Una ficha técnica estandarizada por producto, con ingredientes, trazabilidad y habilitación sanitaria</li>
+              </ul>
+            </li>
+            <li class="tarjeta">
+              <span class="etiqueta">Experiencia</span>
+              <ul class="puntos" style="margin-top:.8rem">
+                <li>Un canal único con clientes y distribuidores, con aviso de pedido listo</li>
+                <li>Canal B2B2C: gimnasios, boxes y nutricionistas</li>
+                <li>Contenido de marca en redes y un QR en el envase que cuente su historia</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bloque">
+          <h3>Tecnologías que sí incorporaríamos</h3>
+          <p class="texto">Con el criterio del Hype Cycle de Gartner elegimos solo tecnologías que ya muestran productividad real y son realistas para el tamaño de Orann: plataformas de e-commerce, WhatsApp Business, códigos QR, un CRM liviano y un tablero sobre el ERP actual. Dejamos fuera, por ahora, los sensores IoT y los chatbots con IA generativa.</p>
+        </div>
+
+        <div class="bloque">
+          <h3>Casos que respaldan la propuesta</h3>
+          <ul class="grilla g3">
+            <li class="tarjeta"><h4>Merlin Foods · Argentina</h4><p>Empresa de barritas saludables que sumó la producción para terceros como palanca de crecimiento.</p></li>
+            <li class="tarjeta"><h4>Nutriveg · Argentina</h4><p>Marca plant-based que amplió su alcance comercial más allá del canal tradicional.</p></li>
+            <li class="tarjeta"><h4>De la Tierra · Uruguay</h4><p>Pionera en snacks saludables que siguió creciendo mientras evaluaba su propia venta.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Etapa 4 ================= -->
+    <section id="brechas" class="seccion clara">
+      <div class="contenedor">
+        <span class="etiqueta">Etapa 4 · Brechas y escenarios</span>
+        <h2>De la visión a lo posible</h2>
+        <p class="intro">Comparamos la arquitectura actual con la de destino y expresamos las brechas como capacidades (ABB), no como productos. Después evaluamos cuatro escenarios para implementarlas.</p>
+
+        <div class="bloque">
+          <h3>Las siete capacidades candidatas</h3>
+          <ul class="grilla g4">
+            <li class="tarjeta acento"><span class="etiqueta">ABB 1</span><h4 style="margin-top:.3rem">Gestión documental centralizada</h4></li>
+            <li class="tarjeta"><span class="etiqueta">ABB 2</span><h4 style="margin-top:.3rem">Gestión e integración del ERP</h4></li>
+            <li class="tarjeta"><span class="etiqueta">ABB 3</span><h4 style="margin-top:.3rem">Respaldo y recuperación de la información</h4></li>
+            <li class="tarjeta"><span class="etiqueta">ABB 4</span><h4 style="margin-top:.3rem">Gestión centralizada de clientes y distribuidores</h4></li>
+            <li class="tarjeta"><span class="etiqueta">ABB 5</span><h4 style="margin-top:.3rem">Canal consolidado de comunicación</h4></li>
+            <li class="tarjeta"><span class="etiqueta">ABB 6</span><h4 style="margin-top:.3rem">Información analítica de costos y ventas</h4></li>
+            <li class="tarjeta"><span class="etiqueta">ABB 7</span><h4 style="margin-top:.3rem">Trazabilidad digital unificada</h4></li>
+          </ul>
+          <p class="leyenda">El e-commerce, la suscripción, la maquila y el canal B2B2C quedan fuera del alcance inicial: antes hay que validar demanda, logística, costos y requisitos sanitarios.</p>
+        </div>
+
+        <div class="bloque">
+          <h3>Cuatro escenarios, un puntaje ponderado</h3>
+          <div class="matriz" role="table" aria-label="Escenarios evaluados y su puntaje ponderado sobre 5">
+            <span role="columnheader"></span>
+            <span class="eje col" role="columnheader">On-premises</span>
+            <span class="eje col" role="columnheader">SaaS</span>
+            <span class="eje" role="rowheader">Big Bang</span>
+            <div class="celda" role="cell"><span class="nombre">Escenario 1</span><div class="puntaje">1,80 <small>/ 5</small></div></div>
+            <div class="celda" role="cell"><span class="nombre">Escenario 3</span><div class="puntaje">2,84 <small>/ 5</small></div></div>
+            <span class="eje" role="rowheader">Modular</span>
+            <div class="celda" role="cell"><span class="nombre">Escenario 2</span><div class="puntaje">2,94 <small>/ 5</small></div></div>
+            <div class="celda elegido" role="cell"><span class="nombre">Escenario 4 · elegido</span><div class="puntaje">4,06 <small>/ 5</small></div></div>
+          </div>
+          <p class="texto" style="margin-top:1.25rem">Ganó la implementación <strong>SaaS modular</strong>: Orann no tiene capacidad técnica propia, ya se está moviendo a la nube, no puede arriesgar un cambio simultáneo mientras no formalice su ERP, y su personal necesita adoptar las herramientas de a una.</p>
+        </div>
+
+        <div class="bloque">
+          <h3>Secuencia propuesta</h3>
+          <ol class="secuencia">
+            <li><strong>Gestión documental centralizada y su respaldo.</strong> Es la etapa que aborda esta consultoría, porque no depende del sistema de gestión.</li>
+            <li><strong>Formalizar la relación con el proveedor del ERP</strong> y el respaldo general de la información.</li>
+            <li><strong>Gestión de clientes y canal consolidado</strong> de comunicación.</li>
+            <li><strong>Información analítica y trazabilidad digital</strong> unificada.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Etapa 5 ================= -->
+    <section id="alcance" class="seccion">
+      <div class="contenedor">
+        <span class="etiqueta">Etapa 5 · Alcance y mercado de soluciones</span>
+        <h2>Nuestro alcance</h2>
+        <p class="intro">Antes del 1 de diciembre de 2026, presentar a la Sponsor una recomendación de solución tecnológica y un plan de implementación para documentar y centralizar el conocimiento de sus procesos, de modo que la empresa resulte transferible a un futuro comprador.</p>
+
+        <div class="bloque">
+          <h3>Cronograma</h3>
+          <ol class="cronograma">
+            <li class="hecho"><span class="fecha">9 de octubre</span><p>Criterios ponderados, relevamiento de 4 proveedores y preselección de 2.</p></li>
+            <li class="hecho"><span class="fecha">15 de octubre</span><p>Validación del alcance con la Sponsor y relevamiento de la documentación existente. El alcance quedó validado el 16 de octubre.</p></li>
+            <li class="ahora"><span class="fecha">22 de octubre</span><p>Evaluación de los proveedores preseleccionados con la matriz RFP.</p></li>
+            <li class="ahora"><span class="fecha">29 de octubre</span><p>Análisis de las propuestas comerciales y recomendación de una solución.</p></li>
+            <li><span class="fecha">23 de noviembre</span><p>Plan de implementación: orden de documentación, responsables, capacitación y respaldo.</p></li>
+            <li><span class="fecha">1 de diciembre</span><p>Presentación de la recomendación y el plan a la Sponsor.</p></li>
+          </ol>
+        </div>
+
+        <div class="bloque">
+          <h3>Madurez por capacidad: hoy, con este proyecto y en el destino</h3>
+          <div class="barras" role="img" aria-label="Madurez de 0 a 5 por capacidad: documentación de procesos 2, 3 y 4; fichas técnicas 2, 3 y 4; respaldo de la información 1, 2 y 4; trazabilidad digital 2, 2 y 4; información para decisiones 2, 2 y 4; gestión de clientes 2, 2 y 4; diversificación de ingresos 1, 1 y 4; marca y presencia digital 2, 2 y 4.">
+            <div class="barra-fila"><span class="rotulo">Documentación de procesos y conocimiento</span><div class="pistas"><div class="pista"><span class="act" style="width:40%"></span></div><div class="pista"><span class="tra" style="width:60%"></span></div><div class="pista"><span class="des" style="width:80%"></span></div></div></div>
+            <div class="barra-fila"><span class="rotulo">Fichas técnicas de producto</span><div class="pistas"><div class="pista"><span class="act" style="width:40%"></span></div><div class="pista"><span class="tra" style="width:60%"></span></div><div class="pista"><span class="des" style="width:80%"></span></div></div></div>
+            <div class="barra-fila"><span class="rotulo">Respaldo y continuidad de la información</span><div class="pistas"><div class="pista"><span class="act" style="width:20%"></span></div><div class="pista"><span class="tra" style="width:40%"></span></div><div class="pista"><span class="des" style="width:80%"></span></div></div></div>
+            <div class="barra-fila"><span class="rotulo">Trazabilidad digital</span><div class="pistas"><div class="pista"><span class="act" style="width:40%"></span></div><div class="pista"><span class="tra" style="width:40%"></span></div><div class="pista"><span class="des" style="width:80%"></span></div></div></div>
+            <div class="barra-fila"><span class="rotulo">Información para decisiones</span><div class="pistas"><div class="pista"><span class="act" style="width:40%"></span></div><div class="pista"><span class="tra" style="width:40%"></span></div><div class="pista"><span class="des" style="width:80%"></span></div></div></div>
+            <div class="barra-fila"><span class="rotulo">Gestión de clientes y canal de comunicación</span><div class="pistas"><div class="pista"><span class="act" style="width:40%"></span></div><div class="pista"><span class="tra" style="width:40%"></span></div><div class="pista"><span class="des" style="width:80%"></span></div></div></div>
+            <div class="barra-fila"><span class="rotulo">Diversificación de ingresos</span><div class="pistas"><div class="pista"><span class="act" style="width:20%"></span></div><div class="pista"><span class="tra" style="width:20%"></span></div><div class="pista"><span class="des" style="width:80%"></span></div></div></div>
+            <div class="barra-fila"><span class="rotulo">Marca y presencia digital</span><div class="pistas"><div class="pista"><span class="act" style="width:40%"></span></div><div class="pista"><span class="tra" style="width:40%"></span></div><div class="pista"><span class="des" style="width:80%"></span></div></div></div>
+          </div>
+          <div class="claves" aria-hidden="true">
+            <span style="--c: var(--junco)">Actual</span>
+            <span style="--c: var(--agua-clara)">Transición (este proyecto)</span>
+            <span style="--c: var(--agua)">Destino</span>
+          </div>
+          <p class="texto" style="margin-top:1rem">No buscamos alcanzar todo el destino, sino dar el primer paso: documentar y centralizar el conocimiento, con sus fichas técnicas y su respaldo. Un nuevo dueño no puede sumar e-commerce o un tablero de decisiones si antes no entiende cómo funciona la empresa.</p>
+        </div>
+
+        <div class="bloque">
+          <h3>Criterios de evaluación</h3>
+          <ul class="pesos">
+            <li><strong>30 %</strong><span class="nombre">Proveedor</span><p>Estabilidad, soporte en español y condiciones de salida.</p></li>
+            <li><strong>30 %</strong><span class="nombre">Funcional</span><p>Simple de adoptar por personas no técnicas.</p></li>
+            <li><strong>10 %</strong><span class="nombre">Técnico</span><p>Versiones, permisos, portabilidad y respaldo.</p></li>
+            <li><strong>30 %</strong><span class="nombre">Económico</span><p>Bajo costo mensual, sin gran inversión inicial.</p></li>
+          </ul>
+        </div>
+
+        <div class="bloque">
+          <h3>Proveedores relevados</h3>
+          <ul class="grilla g4">
+            <li class="tarjeta oscura"><span class="etiqueta" style="color:var(--durazno)">Preseleccionado</span><h4 style="margin-top:.3rem">Google Workspace</h4><p>Orann ya lo usa para su correo y sus archivos: no suma un proveedor ni una herramienta nueva.</p></li>
+            <li class="tarjeta oscura"><span class="etiqueta" style="color:var(--durazno)">Preseleccionado</span><h4 style="margin-top:.3rem">Notion</h4><p>La más fuerte en lo funcional, con plantillas y bases de datos para estandarizar procesos y fichas.</p></li>
+            <li class="tarjeta"><span class="etiqueta">Descartado</span><h4 style="margin-top:.3rem">Trainual</h4><p>Muy específica para procedimientos, pero su costo fijo es alto para el momento de la empresa.</p></li>
+            <li class="tarjeta"><span class="etiqueta">Descartado</span><h4 style="margin-top:.3rem">Nuclino</h4><p>Simple y económica, pero de un proveedor más chico y con menos herramientas de estandarización.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Etapa 6 ================= -->
+    <section id="rfp" class="seccion clara">
+      <div class="contenedor">
+        <span class="etiqueta">Etapa 6 · Matriz RFP</span>
+        <h2>Google Workspace frente a Notion</h2>
+        <p class="intro">Desagregamos los cuatro criterios en categorías e ítems atómicos, cada uno con su ponderación, justificación, requisito de cumplimiento y forma de validación. El aspecto funcional se construyó a partir de los procesos y recursos que Orann necesita documentar para el traspaso.</p>
+
+        <div class="bloque">
+          <ul class="grilla g4">
+            <li class="tarjeta"><span class="nivel">102</span><h4 style="margin-top:.5rem">ítems evaluados</h4><p>Distribuidos en los cuatro aspectos y 23 categorías.</p></li>
+            <li class="tarjeta"><span class="nivel">25</span><h4 style="margin-top:.5rem">ítems de proveedor</h4><p>Trayectoria, soporte, presencia local, SLA y condiciones de salida.</p></li>
+            <li class="tarjeta"><span class="nivel">25</span><h4 style="margin-top:.5rem">ítems funcionales</h4><p>Adopción, procesos operativos y de apoyo, dirección, fichas e inventario.</p></li>
+            <li class="tarjeta"><span class="nivel">41</span><h4 style="margin-top:.5rem">ítems técnicos</h4><p>Aplicaciones, datos e infraestructura.</p></li>
+          </ul>
+        </div>
+
+        <div class="aviso">
+          <strong>Etapa en curso.</strong> Ya cargamos la evidencia pública de cada proveedor. Los ítems funcionales y los costos de puesta en marcha se completan con las demos de ambas herramientas y con información que todavía esperamos de la Sponsor.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Próximas ================= -->
+    <section id="proximas" class="seccion proximas">
+      <div class="contenedor">
+        <span class="etiqueta">Lo que viene</span>
+        <h2>Próximas etapas</h2>
+        <ul class="grilla g4 bloque">
+          <li class="tarjeta"><span class="etiqueta">Etapa 7</span><h4 style="margin-top:.3rem">Comparación de cumplimiento y evaluación económica</h4><p>Análisis por proveedor, comparación gráfica y costo total a tres años.</p></li>
+          <li class="tarjeta"><span class="etiqueta">Etapa 8</span><h4 style="margin-top:.3rem">Análisis de la propuesta comercial</h4></li>
+          <li class="tarjeta"><span class="etiqueta">Etapa 9</span><h4 style="margin-top:.3rem">Oportunidad de innovación con IA generativa</h4></li>
+          <li class="tarjeta"><span class="etiqueta">Etapa 10</span><h4 style="margin-top:.3rem">Diseño y validación de la solución de IA generativa</h4></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <span>Cauce Consultora · <a href="index.html">Volver al inicio</a></span>
+      <span>© 2026</span>
+    </div>
+  </footer>
+
+</body>
+</html>

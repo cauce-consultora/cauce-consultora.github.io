@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cauce Consultora</title>
   <meta name="description" content="Cauce Consultora: consultora de sistemas. Diagnóstico, plan de acción y acompañamiento para que las empresas ordenen sus sistemas y ganen valor.">
+  <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;1,300&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
@@ -275,18 +276,77 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
+
+    /* ---------- Agregados: logo, enlace al caso y equipo ---------- */
+    .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .marca img {
+      height: 1.9rem;
+      width: auto;
+      display: block;
+    }
+    .caso .enlace-caso {
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: var(--agua);
+      text-decoration-color: var(--agua-clara);
+      text-underline-offset: 4px;
+    }
+    .caso .enlace-caso:hover { color: var(--agua-clara); }
+
+    .equipo-titulo {
+      margin-top: 3rem;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.3rem;
+      color: var(--agua);
+    }
+    .equipo {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    .equipo li {
+      background: var(--superficie);
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
+      border-top: 3px solid var(--durazno);
+    }
+    .equipo li.destacado { border-top-color: var(--agua-clara); }
+    .equipo .nombre {
+      display: block;
+      font-weight: 600;
+      color: var(--tinta);
+    }
+    .equipo .rol {
+      display: block;
+      margin-top: 0.15rem;
+      font-size: 0.9rem;
+      color: var(--limo);
+    }
+    @media (max-width: 760px) {
+      .nav ul { gap: 0.85rem; }
+      .marca img { height: 1.6rem; }
+    }
   </style>
 </head>
 <body>
 
   <header class="nav">
     <div class="contenedor">
-      <a href="#inicio" class="marca">CAUCE</a>
+      <a href="#inicio" class="marca"><img src="img/logo-cauce.png" alt="" width="480" height="262">CAUCE</a>
       <nav aria-label="Secciones">
         <ul>
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#quienes-somos">Quiénes somos</a></li>
+          <li><a href="orann.html">Proyecto Orann</a></li>
         </ul>
       </nav>
     </div>
@@ -339,7 +399,18 @@
           <div class="caso">
             <h3>Proyecto actual: Orann</h3>
             <p>Los dueños de Orann se preparan para retirarse y vender la empresa. Nos convocaron para hacer un diagnóstico y diseñar un plan de acción que ellos puedan implementar, con un objetivo claro: entregar la empresa al mayor valor posible.</p>
+            <a href="orann.html" class="enlace-caso">Ver el proyecto etapa por etapa →</a>
           </div>
+
+          <h3 class="equipo-titulo">El equipo</h3>
+          <ul class="equipo">
+            <li class="destacado"><span class="nombre">Paloma Steinberg</span><span class="rol">Product Owner</span></li>
+            <li class="destacado"><span class="nombre">Camila Blanco</span><span class="rol">Scrum Master</span></li>
+            <li><span class="nombre">Camila Albornoz</span><span class="rol">Team Member</span></li>
+            <li><span class="nombre">Matías Fretes</span><span class="rol">Team Member</span></li>
+            <li><span class="nombre">Juliana González</span><span class="rol">Team Member</span></li>
+            <li><span class="nombre">Luis Santalla</span><span class="rol">Team Member</span></li>
+          </ul>
         </div>
       </div>
     </section>
