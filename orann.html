@@ -54,7 +54,7 @@
       text-decoration: none; color: var(--agua);
     }
     .marca img { height: 1.9rem; width: auto; display: block; }
-    .nav ul { display: flex; gap: 2rem; list-style: none; }
+    .nav ul { display: flex; flex-wrap: wrap; gap: 0.4rem 1.75rem; list-style: none; }
     .nav ul a { text-decoration: none; font-size: 0.95rem; font-weight: 500; color: var(--limo); transition: color 0.2s; }
     .nav ul a:hover, .nav ul a[aria-current] { color: var(--agua); }
 
@@ -254,6 +254,14 @@
     /* Próximas etapas */
     .proximas .tarjeta { border-top-style: dashed; background: transparent; border: 1px dashed var(--junco); }
 
+    /* Resumen ejecutivo */
+    .resumen { margin-top: 3.5rem; padding: 2rem 2.25rem; background: var(--superficie); border-radius: 12px; border-left: 3px solid var(--frambuesa); }
+    .resumen h2 { font-family: var(--serif); font-weight: 400; font-size: 1.5rem; color: var(--agua); }
+    .resumen dl { display: grid; grid-template-columns: 12rem 1fr; gap: 1rem 2rem; margin-top: 1.25rem; }
+    .resumen dt { font-weight: 600; }
+    .resumen dd { color: var(--limo); }
+    @media (max-width: 760px) { .resumen { padding: 1.5rem; } .resumen dl { grid-template-columns: 1fr; gap: 0.2rem; } .resumen dd { margin-bottom: 0.8rem; } }
+
     /* ---------- Pie ---------- */
     footer { padding: 2.5rem 0; border-top: 1px solid var(--junco); font-size: 0.9rem; color: var(--limo); }
     footer .contenedor { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
@@ -277,7 +285,8 @@
       .matriz { grid-template-columns: 1fr 1fr; }
       .matriz .eje { display: none; }
     }
-    @media (max-width: 420px) {
+    @media (max-width: 560px) {
+      .nav ul { justify-content: center; }
       .nav .contenedor { flex-direction: column; justify-content: center; gap: 0.25rem; height: auto; padding-top: 0.75rem; padding-bottom: 0.75rem; }
       section { scroll-margin-top: 6rem; }
       .g4, .pesos { grid-template-columns: 1fr; }
@@ -292,8 +301,8 @@
       <a href="index.html" class="marca"><img src="img/logo-cauce.png" alt="" width="480" height="262">CAUCE</a>
       <nav aria-label="Secciones">
         <ul>
-          <li><a href="index.html">Inicio</a></li>
           <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="index.html#enfoque">Cómo trabajamos</a></li>
           <li><a href="index.html#quienes-somos">Quiénes somos</a></li>
           <li><a href="orann.html" aria-current="page">Proyecto Orann</a></li>
         </ul>
@@ -314,6 +323,22 @@
           <li><strong>~150</strong><span>clientes y distribuidores en todo el país</span></li>
           <li><strong>2–3 años</strong><span>plazo que se fijaron los dueños para la venta</span></li>
         </ul>
+
+        <div class="resumen" aria-labelledby="titulo-resumen">
+          <h2 id="titulo-resumen">Resumen ejecutivo</h2>
+          <dl>
+            <dt>Situación</dt>
+            <dd>Orann elabora sus productos desde 1994 y vende a unos 150 clientes y distribuidores en todo el país, pero su funcionamiento depende del conocimiento de sus fundadores. La cadena productiva no tiene sistemas que la registren y los procesos no están documentados.</dd>
+            <dt>Objetivo del proyecto</dt>
+            <dd>Recomendar una solución tecnológica y un plan de implementación para documentar y centralizar el conocimiento de la empresa, de modo que resulte transferible a un futuro comprador.</dd>
+            <dt>Enfoque</dt>
+            <dd>Análisis de arquitectura empresarial actual y destino, identificación de siete capacidades faltantes y evaluación ponderada de cuatro escenarios de implementación.</dd>
+            <dt>Recomendación preliminar</dt>
+            <dd>Implementación SaaS modular, empezando por la gestión documental centralizada y su respaldo. Google Workspace y Notion son las dos soluciones preseleccionadas.</dd>
+            <dt>Próximo hito</dt>
+            <dd>Presentación de la recomendación final y del plan de implementación a la Sponsor, el 1 de diciembre de 2026.</dd>
+          </dl>
+        </div>
       </div>
     </section>
 
