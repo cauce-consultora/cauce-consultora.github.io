@@ -181,6 +181,13 @@
     .equipo li.destacado { border-top-color: var(--junco); }
     .equipo .nombre { display: block; font-weight: 600; }
     .equipo .rol { display: block; margin-top: 0.15rem; font-size: 0.9rem; color: var(--limo); }
+    .equipo li { text-align: center; padding-top: 1.5rem; padding-bottom: 1.35rem; }
+    .equipo .foto {
+      display: block; width: 6.5rem; height: 6.5rem; margin: 0 auto 0.9rem;
+      border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--durazno); background: var(--superficie);
+    }
+    .equipo li.destacado .foto { border-color: var(--junco); }
 
     /* Caso destacado */
     .caso { background: var(--medianoche); color: var(--superficie); padding: 5.5rem 0; }
@@ -509,12 +516,12 @@
           <h3>El equipo</h3>
           <p>Trabajamos con Scrum. La Product Owner representa los objetivos del cliente y prioriza el trabajo, la Scrum Master organiza el proceso y el resto del equipo desarrolla los entregables de cada etapa.</p>
           <ul class="equipo">
-            <li class="destacado"><span class="nombre">Paloma Steinberg</span><span class="rol">Product Owner</span></li>
-            <li class="destacado"><span class="nombre">Camila Blanco</span><span class="rol">Scrum Master</span></li>
-            <li><span class="nombre">Camila Albornoz</span><span class="rol">Consultora</span></li>
-            <li><span class="nombre">Matías Fretes</span><span class="rol">Consultor</span></li>
-            <li><span class="nombre">Juliana González</span><span class="rol">Consultora</span></li>
-            <li><span class="nombre">Luis Santalla</span><span class="rol">Consultor</span></li>
+            <li class="destacado"><img class="foto" src="img/equipo/paloma-steinberg.jpg" alt="Paloma Steinberg" width="320" height="320" loading="lazy"><span class="nombre">Paloma Steinberg</span><span class="rol">Product Owner</span></li>
+            <li class="destacado"><img class="foto" src="img/equipo/camila-blanco.jpg" alt="Camila Blanco" width="320" height="320" loading="lazy"><span class="nombre">Camila Blanco</span><span class="rol">Scrum Master</span></li>
+            <li><img class="foto" src="img/equipo/camila-albornoz.jpg" alt="Camila Albornoz" width="320" height="320" loading="lazy"><span class="nombre">Camila Albornoz</span><span class="rol">Consultora</span></li>
+            <li><img class="foto" src="img/equipo/matias-fretes.jpg" alt="Matías Fretes" width="320" height="320" loading="lazy"><span class="nombre">Matías Fretes</span><span class="rol">Consultor</span></li>
+            <li><img class="foto" src="img/equipo/juliana-gonzalez.jpg" alt="Juliana González" width="320" height="320" loading="lazy"><span class="nombre">Juliana González</span><span class="rol">Consultora</span></li>
+            <li><img class="foto" src="img/equipo/luis-santalla.jpg" alt="Luis Santalla" width="320" height="320" loading="lazy"><span class="nombre">Luis Santalla</span><span class="rol">Consultor</span></li>
           </ul>
         </div>
       </div>
