@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Cauce Consultora | Sistemas de información y arquitectura empresarial</title>
+  <meta name="description" content="Cauce es una consultora en sistemas de información. Diagnóstico organizacional, arquitectura empresarial, selección de soluciones tecnológicas y preparación de empresas para su venta o sucesión.">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;1,300&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --piedra: #F6EEE4;      /* crema: fondo */
+      --superficie: #FBF7F1;  /* marfil */
+      --agua: #2A2F3B;        /* Azul Marino Profundo: color principal */
+      --agua-clara: #F4A78A;  /* Melocotón Coral */
+      --junco: #B64F6B;       /* Frambuesa */
+      --durazno: #E89E8D;     /* Melocotón Suave */
+      --medianoche: #141822;  /* Azul Marino Medianoche */
+      --tinta: #2A2F3B;
+      --limo: #565B6A;        /* texto secundario */
+      --linea: rgba(86, 91, 106, 0.2);
+      --serif: "Spectral", Georgia, serif;
+      --sans: "Figtree", system-ui, sans-serif;
+      --ancho: 70rem;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--piedra);
+      color: var(--tinta);
+      font-family: var(--sans);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--junco); outline-offset: 3px; border-radius: 2px; }
+    .contenedor { max-width: var(--ancho); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ---------- Navegación ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(246, 238, 228, 0.92);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    }
+    .nav .contenedor { display: flex; align-items: center; justify-content: space-between; height: 4.25rem; }
+    .marca {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 1.3rem; font-weight: 600; letter-spacing: 0.06em;
+      text-decoration: none; color: var(--agua);
+    }
+    .marca img { height: 2.3rem; width: auto; display: block; }
+    .nav ul { display: flex; flex-wrap: wrap; gap: 0.4rem 1.75rem; list-style: none; }
+    .nav ul a { text-decoration: none; font-size: 0.95rem; font-weight: 500; color: var(--limo); transition: color 0.2s; }
+    .nav ul a:hover { color: var(--agua); }
+
+    /* ---------- Inicio ---------- */
+    .inicio { position: relative; overflow: hidden; padding: 6.5rem 0 13rem; }
+    .inicio .rio { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 10rem; pointer-events: none; }
+    .rio .c1 { fill: var(--durazno); }
+    .rio .c2 { fill: var(--junco); }
+    .rio .c3 { fill: var(--agua-clara); }
+    .rio .c4 { fill: var(--agua); }
+    .rio .c5 { fill: var(--medianoche); }
+    .inicio .contenedor { position: relative; }
+    .inicio h1 {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(2.4rem, 5.4vw, 4.1rem); line-height: 1.12; letter-spacing: -0.015em;
+      color: var(--agua); max-width: 16em;
+    }
+    .inicio .bajada { margin-top: 1.75rem; max-width: 38rem; font-size: 1.15rem; color: var(--limo); }
+    .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; margin-top: 2.5rem; }
+    .boton {
+      display: inline-block; padding: 0.85rem 1.6rem;
+      background: var(--agua); color: var(--superficie);
+      text-decoration: none; font-weight: 500; border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .boton:hover { background: var(--agua-clara); color: var(--agua); }
+    .enlace {
+      font-weight: 500; color: var(--agua);
+      text-decoration: underline; text-decoration-color: var(--agua-clara);
+      text-decoration-thickness: 2px; text-underline-offset: 5px;
+    }
+    .enlace:hover { color: var(--junco); }
+
+    /* ---------- Propósito (banda oscura) ---------- */
+    .proposito { background: var(--medianoche); color: var(--superficie); padding: 5rem 0 5.5rem; }
+    .proposito .rotulo { font-size: 0.95rem; font-weight: 500; color: var(--durazno); }
+    .proposito blockquote {
+      margin-top: 1rem;
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(1.8rem, 3.6vw, 2.75rem); line-height: 1.22;
+      max-width: 22em;
+    }
+    .proposito p.detalle { margin-top: 1.75rem; max-width: 40rem; color: #C9CCD6; }
+
+    /* ---------- Secciones ---------- */
+    section { scroll-margin-top: 4.5rem; }
+    .seccion { padding: 6rem 0; }
+    .seccion.clara { background: var(--superficie); }
+    .cabecera { display: grid; grid-template-columns: 1fr 1.35fr; gap: 1rem 4rem; align-items: end; }
+    .seccion h2 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.2; color: var(--agua);
+    }
+    .cabecera .intro { color: var(--limo); max-width: 38rem; }
+    .seccion h3 { font-family: var(--serif); font-weight: 400; font-size: 1.4rem; line-height: 1.25; color: var(--agua); }
+
+    /* Desafíos */
+    .desafios { list-style: none; margin-top: 3.5rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 4rem; }
+    .desafios li { padding: 1.5rem 0; border-top: 1px solid var(--linea); }
+    .desafios h3 { font-size: 1.25rem; }
+    .desafios p { margin-top: 0.5rem; color: var(--limo); max-width: 30rem; }
+
+    /* Servicios: filas editoriales */
+    .servicios-lista { list-style: none; margin-top: 3.5rem; }
+    .servicio {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.25rem 4rem;
+      padding: 2.25rem 0; border-top: 1px solid var(--linea);
+    }
+    .servicio:last-child { border-bottom: 1px solid var(--linea); }
+    .servicio p { margin-top: 0.75rem; color: var(--limo); max-width: 34rem; }
+    .entregables h4 { font-size: 0.95rem; font-weight: 600; color: var(--junco); }
+    .entregables ul { list-style: none; margin-top: 0.6rem; }
+    .entregables li { position: relative; padding-left: 1.3rem; font-size: 0.98rem; color: var(--tinta); }
+    .entregables li + li { margin-top: 0.4rem; }
+    .entregables li::before {
+      content: ""; position: absolute; left: 0; top: 0.62em;
+      width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--agua-clara);
+    }
+
+    /* Metodología: fases en secuencia */
+    .fases {
+      position: relative; list-style: none; counter-reset: fase;
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem;
+      margin-top: 4rem;
+    }
+    .fases::before {
+      content: ""; position: absolute; top: 1.2rem; left: 1.2rem; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--junco), var(--agua-clara));
+    }
+    .fase { position: relative; counter-increment: fase; padding-top: 3.5rem; }
+    .fase::before {
+      content: counter(fase); position: absolute; top: 0; left: 0;
+      width: 2.4rem; height: 2.4rem; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--superficie); border: 2px solid var(--agua);
+      font-weight: 600; color: var(--agua);
+    }
+    .fase h3 { font-size: 1.25rem; }
+    .fase p { margin-top: 0.5rem; font-size: 0.96rem; color: var(--limo); }
+
+    .marcos { margin-top: 4.5rem; padding-top: 2.5rem; border-top: 1px solid var(--linea); }
+    .marcos > p { color: var(--limo); max-width: 40rem; margin-top: 0.5rem; }
+    .marcos ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 1.5rem 2.5rem; margin-top: 1.75rem; }
+    .marcos strong { display: block; font-weight: 600; }
+    .marcos span { display: block; margin-top: 0.25rem; font-size: 0.93rem; color: var(--limo); }
+
+    /* Principios */
+    .principios { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 4rem; margin-top: 3.5rem; }
+    .principios li { padding-left: 1.5rem; border-left: 3px solid var(--agua-clara); }
+    .principios p { margin-top: 0.5rem; color: var(--limo); }
+
+    /* Quiénes somos */
+    .quienes-cuerpo { display: grid; grid-template-columns: 1fr 1.35fr; gap: 2rem 4rem; margin-top: 3rem; }
+    .quienes-cuerpo .texto p { color: var(--limo); }
+    .quienes-cuerpo .texto p + p { margin-top: 1rem; }
+    .identidad { list-style: none; display: grid; gap: 1.75rem; }
+    .identidad h3 { font-size: 1.25rem; }
+    .identidad p { margin-top: 0.4rem; color: var(--limo); }
+
+    .equipo-bloque { margin-top: 4.5rem; }
+    .equipo-bloque > p { margin-top: 0.5rem; color: var(--limo); max-width: 44rem; }
+    .equipo { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-top: 1.75rem; }
+    .equipo li { background: var(--superficie); border-radius: 10px; padding: 1.1rem 1.25rem; border-top: 3px solid var(--durazno); }
+    .seccion.clara .equipo li { background: var(--piedra); }
+    .equipo li.destacado { border-top-color: var(--junco); }
+    .equipo .nombre { display: block; font-weight: 600; }
+    .equipo .rol { display: block; margin-top: 0.15rem; font-size: 0.9rem; color: var(--limo); }
+    .equipo li {
+      display: grid; grid-template-columns: auto 1fr; column-gap: 0.9rem; align-items: center;
+    }
+    .equipo .foto {
+      grid-row: 1 / span 2;
+      width: 4rem; height: 4rem;
+      border-radius: 50%; object-fit: cover;
+      border: 2px solid var(--durazno); background: var(--superficie);
+    }
+    .equipo .nombre { align-self: end; }
+    .equipo .rol { align-self: start; }
+    .equipo li.destacado .foto { border-color: var(--junco); }
+
+    /* Caso destacado */
+    .caso { background: var(--medianoche); color: var(--superficie); padding: 5.5rem 0; }
+    .caso h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 3.4vw, 2.6rem); line-height: 1.2; }
+    .caso .intro { margin-top: 1rem; max-width: 42rem; color: #C9CCD6; }
+    .caso-columnas { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3rem; }
+    .caso-columnas li { border-top: 2px solid var(--durazno); padding-top: 1.1rem; }
+    .caso-columnas h3 { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; color: var(--durazno); }
+    .caso-columnas p { margin-top: 0.5rem; color: #D5D8E0; font-size: 0.98rem; }
+    .caso .boton { margin-top: 3rem; background: var(--agua-clara); color: var(--medianoche); }
+    .caso .boton:hover { background: var(--superficie); }
+
+    /* ---------- Pie ---------- */
+    footer { padding: 2.5rem 0; font-size: 0.9rem; color: var(--limo); }
+    footer .contenedor { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .fases { grid-template-columns: 1fr; gap: 2rem; padding-left: 3.5rem; }
+      .fases::before { top: 1.2rem; bottom: 0; left: 1.15rem; right: auto; width: 2px; height: auto; background: linear-gradient(to bottom, var(--junco), var(--agua-clara)); }
+      .fase { padding-top: 0.3rem; }
+      .fase::before { left: -3.5rem; }
+      .equipo { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .nav ul { gap: 0.3rem 1rem; }
+      .nav ul a { font-size: 0.875rem; }
+      .marca { font-size: 1.2rem; }
+      .marca img { height: 1.6rem; }
+      .inicio { padding: 4.5rem 0 10rem; }
+      .seccion, .caso { padding: 4.5rem 0; }
+      .proposito { padding: 4rem 0; }
+      .cabecera, .desafios, .servicio, .principios, .quienes-cuerpo, .caso-columnas { grid-template-columns: 1fr; }
+      .desafios { gap: 0; }
+      .servicio { gap: 1.25rem; }
+      .principios, .caso-columnas { gap: 2rem; }
+    }
+    @media (max-width: 560px) {
+      .nav .contenedor { flex-direction: column; justify-content: center; gap: 0.35rem; height: auto; padding-top: 0.75rem; padding-bottom: 0.75rem; }
+      .nav ul { justify-content: center; }
+      section { scroll-margin-top: 6rem; }
+      .equipo { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+
+    /* Clientes */
+    .volanta-clara { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--durazno); }
+    .caso h2 { margin-top: 0.5rem; }
+    .cliente { margin-top: 2.5rem; padding: 2.25rem 2.5rem 2.5rem; border-radius: 16px; background: rgba(251, 247, 241, 0.04); border: 1px solid rgba(232, 158, 141, 0.28); }
+    .cliente-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+    .cliente-nombre { font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 3.8vw, 2.8rem); line-height: 1; color: var(--superficie); }
+    .cliente-meta { margin-top: 0.6rem; font-size: 0.92rem; color: #C9CCD6; }
+    .chip { font-size: 0.78rem; font-weight: 600; padding: 0.3rem 0.8rem; border-radius: 999px; background: rgba(182, 79, 107, 0.45); color: #FFE1D6; white-space: nowrap; }
+    .cliente-desc { margin-top: 1.25rem; max-width: 42rem; color: #D5D8E0; }
+    .cliente .caso-columnas { margin-top: 2.25rem; }
+    @media (max-width: 760px) { .cliente { padding: 1.5rem 1.25rem 1.75rem; } }
+
+    /* Contacto */
+    .contacto-grilla { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.5rem 4rem; margin-top: 3rem; align-items: start; }
+    .formulario { display: grid; gap: 1.1rem; }
+    .formulario label { display: grid; gap: 0.4rem; font-size: 0.92rem; font-weight: 600; color: var(--tinta); }
+    .formulario input, .formulario textarea {
+      font: inherit; font-weight: 400; font-size: 1rem; color: var(--tinta);
+      padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid rgba(86, 91, 106, 0.3); background: var(--piedra);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .formulario textarea { resize: vertical; min-height: 8rem; }
+    .formulario input:focus, .formulario textarea:focus { outline: none; border-color: var(--junco); box-shadow: 0 0 0 3px rgba(182, 79, 107, 0.18); }
+    .formulario [aria-invalid="true"] { border-color: var(--junco); }
+    .campo-doble { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .formulario .boton { justify-self: start; border: 0; cursor: pointer; font: inherit; font-weight: 500; }
+    .form-nota { font-size: 0.85rem; color: var(--limo); }
+    .form-nota.error { color: var(--junco); font-weight: 600; }
+    .datos-lista { list-style: none; display: grid; gap: 1.25rem; }
+    .datos-lista li { display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: start; }
+    .datos-lista .icono { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: rgba(182, 79, 107, 0.1); color: var(--junco); }
+    .datos-lista .icono svg { width: 1.3rem; height: 1.3rem; }
+    .datos-lista strong { display: block; font-weight: 600; }
+    .datos-lista a, .datos-lista span { color: var(--limo); font-size: 0.98rem; overflow-wrap: anywhere; }
+    .datos-lista a:hover { color: var(--junco); }
+    .mapa { margin-top: 1.75rem; border-radius: 14px; overflow: hidden; border: 1px solid rgba(86, 91, 106, 0.2); aspect-ratio: 4 / 3; background: var(--piedra); }
+    .mapa iframe { width: 100%; height: 100%; border: 0; display: block; filter: saturate(0.85); }
+    @media (max-width: 760px) { .contacto-grilla, .campo-doble { grid-template-columns: 1fr; } }
+
+    /* Íconos de servicios, fases y principios */
+    .icono-serv { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 14px; margin-bottom: 1rem; background: var(--medianoche); color: var(--durazno); transition: transform 0.25s, background 0.25s; }
+    .icono-serv svg { width: 1.45rem; height: 1.45rem; }
+    .servicio:hover .icono-serv { transform: rotate(-6deg) scale(1.05); background: var(--junco); color: var(--superficie); }
+    .fase::before { content: none; }
+    .fase-icono { position: absolute; top: 0; left: 0; width: 2.4rem; height: 2.4rem; border-radius: 50%; display: grid; place-items: center; background: var(--superficie); border: 2px solid var(--agua); color: var(--agua); transition: background 0.25s, color 0.25s; }
+    .fase-icono svg { width: 1.15rem; height: 1.15rem; }
+    .fase:hover .fase-icono { background: var(--agua); color: var(--durazno); }
+    .icono-prin { display: inline-grid; place-items: center; width: 2.2rem; height: 2.2rem; margin-bottom: 0.6rem; color: var(--junco); }
+    .icono-prin svg { width: 1.6rem; height: 1.6rem; }
+    @media (max-width: 960px) { .fase-icono { left: -3.5rem; } }
+
+    .marcos li { position: relative; padding-left: 3.25rem; }
+    .marcos .icono-marco { margin-top: 0; position: absolute; left: 0; top: 0.1rem; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 12px; background: rgba(182, 79, 107, 0.1); color: var(--junco); }
+    .icono-marco svg { width: 1.25rem; height: 1.25rem; }
+    /* ---------- Onda ---------- */
+    .desafios .icono { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; margin-bottom: 0.85rem; background: rgba(182, 79, 107, 0.1); color: var(--junco); transition: background 0.25s, color 0.25s, transform 0.25s; }
+    .desafios .icono svg { width: 1.3rem; height: 1.3rem; }
+    .desafios li:hover .icono { background: var(--junco); color: var(--superficie); transform: scale(1.06); }
+    .equipo li { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+    .equipo li:hover { transform: translateY(-3px); box-shadow: 0 10px 24px -14px rgba(20, 24, 34, 0.45); }
+    .servicio { transition: background 0.25s; }
+    .caso-cifras { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(232, 158, 141, 0.3); }
+    .caso-cifras strong { display: block; font-family: var(--serif); font-weight: 400; font-size: clamp(2rem, 3.6vw, 2.8rem); line-height: 1; color: var(--durazno); }
+    .caso-cifras span { display: block; margin-top: 0.45rem; font-size: 0.92rem; color: #C9CCD6; }
+    .revela { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .revela.visible { opacity: 1; transform: none; }
+    .inicio h1, .inicio .bajada, .inicio .acciones { animation: entra 0.9s ease both; }
+    .inicio .bajada { animation-delay: 0.15s; } .inicio .acciones { animation-delay: 0.3s; }
+    @keyframes entra { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    .rio path { animation: ola 9s ease-in-out infinite alternate; transform-origin: center bottom; }
+    .rio .c2 { animation-duration: 11s; } .rio .c3 { animation-duration: 13s; } .rio .c4 { animation-duration: 10s; }
+    @keyframes ola { from { transform: translateX(0) scaleY(1); } to { transform: translateX(-1.5%) scaleY(1.06); } }
+    @media (max-width: 760px) { .caso-cifras { grid-template-columns: 1fr 1fr; } }
+    @media (prefers-reduced-motion: reduce) {
+      .revela { opacity: 1; transform: none; transition: none; }
+      .inicio h1, .inicio .bajada, .inicio .acciones, .rio path { animation: none; }
+      .equipo li:hover, .desafios li:hover .icono { transform: none; }
+    }
+
+    /* Fotos de secciones (Unsplash) */
+    .imagen { margin: 0; }
+    .imagen img { display: block; width: 100%; height: auto; object-fit: cover; border-radius: 14px; background: rgba(232, 158, 141, 0.35); filter: saturate(0.9); }
+    .proposito-grilla { display: grid; grid-template-columns: 1.25fr 1fr; gap: 3rem 4rem; align-items: center; }
+    .imagen.ancha { margin-top: 4rem; }
+    .quienes-cuerpo .imagen { margin-top: 2rem; }
+    .imagen figcaption { margin-top: 0.75rem; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 1.15rem; color: var(--agua); }
+    .cliente-intro { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.5rem 3rem; align-items: center; margin-top: 1.25rem; }
+    .cliente-intro .cliente-desc { margin-top: 0; }
+    .creditos a { color: var(--agua); }
+    @media (max-width: 760px) {
+      .proposito-grilla, .cliente-intro { grid-template-columns: 1fr; }
+      .imagen.ancha { margin-top: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="contenedor">
+      <a href="#inicio" class="marca"><img src="img/logo-cauce.png" alt="" width="374" height="304">CAUCE</a>
+      <nav aria-label="Secciones">
+        <ul>
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#enfoque">Cómo trabajamos</a></li>
+          <li><a href="#quienes-somos">Quiénes somos</a></li>
+          <li><a href="#clientes">Clientes</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= Inicio ================= -->
+    <section id="inicio" class="inicio">
+      <svg class="rio" viewBox="0 0 1200 200" preserveAspectRatio="none" aria-hidden="true">
+        <path class="c1" d="M0 70 C 200 30, 380 120, 600 85 S 980 20, 1200 55 L1200 200 L0 200 Z"/>
+        <path class="c2" d="M0 100 C 220 60, 420 150, 640 110 S 1000 50, 1200 90 L1200 200 L0 200 Z"/>
+        <path class="c3" d="M0 125 C 240 95, 440 175, 660 140 S 1020 85, 1200 120 L1200 200 L0 200 Z"/>
+        <path class="c4" d="M0 150 C 260 125, 460 195, 680 165 S 1040 120, 1200 150 L1200 200 L0 200 Z"/>
+        <path class="c5" d="M0 178 C 280 160, 480 205, 700 188 S 1060 165, 1200 180 L1200 200 L0 200 Z"/>
+      </svg>
+      <div class="contenedor">
+        <h1>Ayudamos a las organizaciones a entender, ordenar y transferir el valor que construyeron.</h1>
+        <p class="bajada">Somos una consultora en sistemas de información. Combinamos arquitectura empresarial, gestión del conocimiento y evaluación de tecnología para que cada decisión se apoye en un diagnóstico riguroso y en un plan que la empresa pueda llevar adelante.</p>
+        <div class="acciones">
+          <a href="#servicios" class="boton">Conocer nuestros servicios</a>
+          <a href="#clientes" class="enlace">Ver nuestros clientes</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Propósito ================= -->
+    <section class="proposito" aria-labelledby="titulo-proposito">
+      <div class="contenedor">
+        <div class="proposito-grilla">
+          <div>
+            <h2 id="titulo-proposito" class="rotulo">Nuestro propósito</h2>
+            <blockquote>Que el valor de una organización no dependa de quienes la sostienen hoy, sino de cómo está organizada.</blockquote>
+            <p class="detalle">Muchas empresas funcionan bien gracias al conocimiento y al esfuerzo de pocas personas. Nuestro trabajo es convertir ese conocimiento en procesos, información y sistemas que la empresa pueda sostener, mejorar y, llegado el momento, transferir.</p>
+          </div>
+          <figure class="imagen"><img src="https://images.unsplash.com/photo-1690378820474-b468b8ee64d3?auto=format&fit=crop&q=75&w=1200" srcset="https://images.unsplash.com/photo-1690378820474-b468b8ee64d3?auto=format&fit=crop&q=75&w=600 600w, https://images.unsplash.com/photo-1690378820474-b468b8ee64d3?auto=format&fit=crop&q=75&w=900 900w, https://images.unsplash.com/photo-1690378820474-b468b8ee64d3?auto=format&fit=crop&q=75&w=1400 1400w" sizes="(max-width: 760px) 100vw, 50vw" alt="Equipo de trabajo reunido alrededor de una mesa con computadoras" loading="lazy" style="aspect-ratio:4 / 5" onerror="this.parentNode.remove()"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Desafíos ================= -->
+    <section id="desafios" class="seccion">
+      <div class="contenedor">
+        <div class="cabecera">
+          <h2>Desafíos que abordamos</h2>
+          <p class="intro">Trabajamos con pymes y empresas familiares en momentos de cambio: crecimiento, modernización, sucesión o venta. Estas son las situaciones que más nos consultan.</p>
+        </div>
+        <ul class="desafios">
+          <li>
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <h3>El conocimiento está concentrado en pocas personas</h3>
+            <p>Procesos que nadie escribió y que se pierden si quien los conoce se va, se jubila o vende su parte.</p>
+          </li>
+          <li>
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></span>
+            <h3>Los sistemas no acompañan la operación</h3>
+            <p>Áreas enteras del negocio que todavía se gestionan con papel, planillas sueltas o mensajes.</p>
+          </li>
+          <li>
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+            <h3>La información no alcanza para decidir</h3>
+            <p>Datos dispersos o duplicados, sin indicadores confiables de costos, ventas o rentabilidad.</p>
+          </li>
+          <li>
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.6 7.6a5.5 5.5 0 1 1-7.8 7.8 5.5 5.5 0 0 1 7.8-7.8zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
+            <h3>Se acerca una venta, una sucesión o un cambio de dueño</h3>
+            <p>La empresa necesita mostrarse ordenada, documentada y capaz de funcionar sin sus fundadores.</p>
+          </li>
+          <li>
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3z"/></svg></span>
+            <h3>Hay que elegir tecnología sin capacidad técnica propia</h3>
+            <p>Muchas opciones en el mercado, poco tiempo para evaluarlas y el riesgo de invertir en la herramienta equivocada.</p>
+          </li>
+          <li>
+            <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 10l-5 3.6L16.5 20 12 16.5 7.5 20 9 13.6 4 10l6.1-1.2z"/></svg></span>
+            <h3>Se quiere innovar, pero no se sabe por dónde empezar</h3>
+            <p>Interés en canales digitales o inteligencia artificial, sin un criterio para separar lo útil de lo que está de moda.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= Servicios ================= -->
+    <section id="servicios" class="seccion clara">
+      <div class="contenedor">
+        <div class="cabecera">
+          <h2>Servicios</h2>
+          <p class="intro">Cada servicio puede contratarse por separado o como parte de un proyecto integral. En todos los casos, el resultado es un entregable concreto que queda en manos de la empresa.</p>
+        </div>
+        <ul class="servicios-lista">
+          <li class="servicio">
+            <div>
+              <span class="icono-serv" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+              <h3>Diagnóstico organizacional y de sistemas</h3>
+              <p>Relevamos cómo funciona la empresa en sus cuatro dominios: negocio, datos, aplicaciones y tecnología. Entrevistamos a la dirección y a las personas clave, medimos la madurez de cada área y detectamos dónde se pierde tiempo, información o valor.</p>
+            </div>
+            <div class="entregables">
+              <h4>Qué entregamos</h4>
+              <ul>
+                <li>Caso de negocio y objetivos estratégicos</li>
+                <li>Mapa de procesos y cobertura de sistemas</li>
+                <li>Evaluación de madurez por área</li>
+                <li>Hallazgos priorizados</li>
+              </ul>
+            </div>
+          </li>
+          <li class="servicio">
+            <div>
+              <span class="icono-serv" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></span>
+              <h3>Arquitectura empresarial y hoja de ruta</h3>
+              <p>Diseñamos la organización a la que se quiere llegar y la comparamos con la actual. Expresamos las brechas como capacidades, no como productos, y evaluamos escenarios de implementación hasta definir un camino realista para el tamaño y los recursos de la empresa.</p>
+            </div>
+            <div class="entregables">
+              <h4>Qué entregamos</h4>
+              <ul>
+                <li>Visión de arquitectura destino</li>
+                <li>Análisis de brechas por capacidad</li>
+                <li>Evaluación ponderada de escenarios</li>
+                <li>Hoja de ruta secuenciada</li>
+              </ul>
+            </div>
+          </li>
+          <li class="servicio">
+            <div>
+              <span class="icono-serv" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M6 21h12"/><path d="M5 7h14"/><path d="m5 7-3 7a3 3 0 0 0 6 0z"/><path d="m19 7-3 7a3 3 0 0 0 6 0z"/></svg></span>
+              <h3>Selección de soluciones tecnológicas</h3>
+              <p>Acompañamos la elección de software con un proceso transparente: definimos criterios ponderados, relevamos el mercado, construimos una matriz de requerimientos (RFP) y comparamos proveedores por cumplimiento, costo total y condiciones comerciales.</p>
+            </div>
+            <div class="entregables">
+              <h4>Qué entregamos</h4>
+              <ul>
+                <li>Criterios de evaluación ponderados</li>
+                <li>Relevamiento y preselección de proveedores</li>
+                <li>Matriz RFP y comparación de cumplimiento</li>
+                <li>Evaluación económica y recomendación</li>
+              </ul>
+            </div>
+          </li>
+          <li class="servicio">
+            <div>
+              <span class="icono-serv" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/></svg></span>
+              <h3>Preparación para la venta o la sucesión</h3>
+              <p>Ayudamos a que la empresa sea transferible. Documentamos procesos, centralizamos el conocimiento y ordenamos la información que un comprador o un sucesor va a pedir, para que el valor de la empresa se pueda demostrar y no solo contar.</p>
+            </div>
+            <div class="entregables">
+              <h4>Qué entregamos</h4>
+              <ul>
+                <li>Procesos clave documentados</li>
+                <li>Repositorio centralizado de conocimiento</li>
+                <li>Fichas técnicas y registros al día</li>
+                <li>Base para la carpeta de venta</li>
+              </ul>
+            </div>
+          </li>
+          <li class="servicio">
+            <div>
+              <span class="icono-serv" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 10l-5 3.6L16.5 20 12 16.5 7.5 20 9 13.6 4 10l6.1-1.2z"/></svg></span>
+              <h3>Innovación con inteligencia artificial</h3>
+              <p>Identificamos dónde la inteligencia artificial generativa puede aportar valor real al negocio, diseñamos la solución y la validamos antes de invertir. Priorizamos tecnologías maduras y adecuadas a la escala de cada empresa.</p>
+            </div>
+            <div class="entregables">
+              <h4>Qué entregamos</h4>
+              <ul>
+                <li>Mapa de oportunidades de innovación</li>
+                <li>Diseño de la solución propuesta</li>
+                <li>Prueba y validación con usuarios</li>
+              </ul>
+            </div>
+          </li>
+          <li class="servicio">
+            <div>
+              <span class="icono-serv" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span>
+              <h3>Plan de implementación y acompañamiento</h3>
+              <p>Convertimos la recomendación en un plan ejecutable: qué se hace primero, quién es responsable, cómo se capacita al equipo y cómo se mide el avance. La empresa implementa y nosotros acompañamos los ajustes.</p>
+            </div>
+            <div class="entregables">
+              <h4>Qué entregamos</h4>
+              <ul>
+                <li>Plan de implementación con responsables</li>
+                <li>Plan de capacitación y gestión del cambio</li>
+                <li>Indicadores de seguimiento</li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= Cómo trabajamos ================= -->
+    <section id="enfoque" class="seccion">
+      <div class="contenedor">
+        <div class="cabecera">
+          <h2>Cómo trabajamos</h2>
+          <p class="intro">Seguimos una metodología en cinco fases. Cada una termina con un entregable que validamos con la persona responsable del proyecto en la empresa antes de avanzar a la siguiente.</p>
+        </div>
+        <ol class="fases">
+          <li class="fase">
+            <span class="fase-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+            <h3>Entender</h3>
+            <p>Conocemos el negocio, sus objetivos y a las personas que lo llevan adelante.</p>
+          </li>
+          <li class="fase">
+            <span class="fase-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+            <h3>Diagnosticar</h3>
+            <p>Relevamos la arquitectura actual y medimos la madurez de cada área.</p>
+          </li>
+          <li class="fase">
+            <span class="fase-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+            <h3>Diseñar</h3>
+            <p>Definimos el destino, las brechas y el escenario de implementación más conveniente.</p>
+          </li>
+          <li class="fase">
+            <span class="fase-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span>
+            <h3>Recomendar</h3>
+            <p>Evaluamos soluciones con criterios explícitos y proponemos la más adecuada.</p>
+          </li>
+          <li class="fase">
+            <span class="fase-icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <h3>Acompañar</h3>
+            <p>Planificamos la implementación y seguimos el avance junto a la empresa.</p>
+          </li>
+        </ol>
+
+        <figure class="imagen ancha"><img src="https://images.unsplash.com/photo-1758876203195-69a51e4145f0?auto=format&fit=crop&q=75&w=1200" srcset="https://images.unsplash.com/photo-1758876203195-69a51e4145f0?auto=format&fit=crop&q=75&w=600 600w, https://images.unsplash.com/photo-1758876203195-69a51e4145f0?auto=format&fit=crop&q=75&w=900 900w, https://images.unsplash.com/photo-1758876203195-69a51e4145f0?auto=format&fit=crop&q=75&w=1400 1400w" sizes="(max-width: 760px) 100vw, 50vw" alt="Dos personas conversan frente a una pared con notas adhesivas de colores durante una sesión de planificación" loading="lazy" style="aspect-ratio:2 / 1" onerror="this.parentNode.remove()"></figure>
+
+        <div class="marcos">
+          <h3>Marcos de referencia</h3>
+          <p>Nos apoyamos en metodologías reconocidas y las adaptamos a la escala de cada cliente.</p>
+          <ul>
+            <li><span class="icono-marco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><strong>Arquitectura empresarial (TOGAF)</strong><span>Análisis por dominios y bloques de capacidades.</span></li>
+            <li><span class="icono-marco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span><strong>Diez tipos de innovación (Doblin)</strong><span>Para pensar el modelo de negocio futuro.</span></li>
+            <li><span class="icono-marco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20c3 0 4-15 6-15s3 9 6 9 4-5 8-5"/></svg></span><strong>Hype Cycle de Gartner</strong><span>Para elegir tecnologías con madurez probada.</span></li>
+            <li><span class="icono-marco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18"/><path d="M3 15h18"/><path d="M9 4v16"/></svg></span><strong>Matriz RFP ponderada</strong><span>Para comparar proveedores con evidencia.</span></li>
+            <li><span class="icono-marco" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span><strong>Scrum</strong><span>Para organizar el trabajo en entregas cortas y validadas.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Principios ================= -->
+    <section id="principios" class="seccion clara">
+      <div class="contenedor">
+        <div class="cabecera">
+          <h2>Lo que guía nuestro trabajo</h2>
+          <p class="intro">Cuatro principios que aplicamos en cada proyecto, desde la primera entrevista hasta la recomendación final.</p>
+        </div>
+        <ul class="principios">
+          <li>
+            <span class="icono-prin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+            <h3>Primero el negocio, después la tecnología</h3>
+            <p>Partimos de los objetivos de la empresa. Una herramienta solo tiene sentido si resuelve un problema concreto.</p>
+          </li>
+          <li>
+            <span class="icono-prin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg></span>
+            <h3>Soluciones a la medida de cada organización</h3>
+            <p>Recomendamos lo que la empresa puede adoptar y sostener con sus recursos actuales, no lo más sofisticado del mercado.</p>
+          </li>
+          <li>
+            <span class="icono-prin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3>Decisiones con criterio explícito</h3>
+            <p>Cada recomendación se apoya en criterios ponderados y evidencia verificable, para que el cliente entienda por qué la elegimos.</p>
+          </li>
+          <li>
+            <span class="icono-prin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20v-8"/><path d="M12 12c0-4 3-7 8-7 0 5-3 7-8 7z"/><path d="M12 14c0-3-2-5-6-5 0 3 2 5 6 5z"/></svg></span>
+            <h3>Capacidad que queda en la empresa</h3>
+            <p>Nuestro trabajo termina bien cuando la organización puede continuar sin nosotros.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= Quiénes somos ================= -->
+    <section id="quienes-somos" class="seccion">
+      <div class="contenedor">
+        <h2>Quiénes somos</h2>
+        <div class="quienes-cuerpo">
+          <div class="texto">
+            <p>Cauce es un equipo de consultores en sistemas de información de las organizaciones. Nos especializamos en entender cómo funciona cada empresa por dentro: cómo circula la información, cómo se toman las decisiones y qué tan preparada está para crecer o cambiar de manos.</p>
+            <p>Nuestro nombre resume la forma en que trabajamos. Eso buscamos con cada cliente: ordenar lo que ya tiene para que pueda avanzar.</p>
+            <figure class="imagen"><img src="https://images.unsplash.com/photo-1759681770972-560b9949da0b?auto=format&fit=crop&q=75&w=1200" srcset="https://images.unsplash.com/photo-1759681770972-560b9949da0b?auto=format&fit=crop&q=75&w=600 600w, https://images.unsplash.com/photo-1759681770972-560b9949da0b?auto=format&fit=crop&q=75&w=900 900w, https://images.unsplash.com/photo-1759681770972-560b9949da0b?auto=format&fit=crop&q=75&w=1400 1400w" sizes="(max-width: 760px) 100vw, 50vw" alt="Vista aérea de un río que serpentea entre un bosque" loading="lazy" style="aspect-ratio:3 / 2" onerror="this.parentNode.remove()"><figcaption>Un cauce no cambia el agua: le da dirección.</figcaption></figure>
+          </div>
+          <ul class="identidad">
+            <li>
+              <h3>Misión</h3>
+              <p>Acompañar a pymes y empresas familiares en sus decisiones sobre procesos, información y tecnología, con diagnósticos rigurosos y propuestas que puedan implementar.</p>
+            </li>
+            <li>
+              <h3>Visión</h3>
+              <p>Ser la consultora de referencia para las organizaciones que necesitan ordenarse antes de dar un paso importante: crecer, modernizarse o cambiar de dueño.</p>
+            </li>
+            <li>
+              <h3>Valores</h3>
+              <p>Rigor en el análisis, honestidad en las recomendaciones, cercanía con el cliente y compromiso con resultados que perduren.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="equipo-bloque">
+          <h3>El equipo</h3>
+          <p>Cada integrante de Cauce aporta una especialidad distinta. Así garantizamos un abordaje completo y transversal del negocio, que integra riesgo, finanzas, auditoría, datos, tecnología e informática y logística en cada diagnóstico y recomendación.</p>
+          <ul class="equipo">
+            <li><img class="foto" src="img/equipo/paloma-steinberg.jpg" alt="Paloma Steinberg" width="320" height="320" loading="lazy"><span class="nombre">Paloma Steinberg</span><span class="rol">Especialista en Riesgo</span></li>
+            <li><img class="foto" src="img/equipo/camila-blanco.jpg" alt="Camila Blanco" width="320" height="320" loading="lazy"><span class="nombre">Camila Blanco</span><span class="rol">Especialista en Datos</span></li>
+            <li><img class="foto" src="img/equipo/camila-albornoz.jpg" alt="Camila Albornoz" width="320" height="320" loading="lazy"><span class="nombre">Camila Albornoz</span><span class="rol">Especialista en Auditoría</span></li>
+            <li><img class="foto" src="img/equipo/matias-fretes.jpg" alt="Matías Fretes" width="320" height="320" loading="lazy"><span class="nombre">Matías Fretes</span><span class="rol">Especialista en Logística</span></li>
+            <li><img class="foto" src="img/equipo/juliana-gonzalez.jpg" alt="Juliana González" width="320" height="320" loading="lazy"><span class="nombre">Juliana González</span><span class="rol">Especialista en Finanzas</span></li>
+            <li><img class="foto" src="img/equipo/luis-santalla.jpg" alt="Luis Santalla" width="320" height="320" loading="lazy"><span class="nombre">Luis Santalla</span><span class="rol">Especialista en Tecnología e Informática</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Caso destacado ================= -->
+    <section id="clientes" class="caso" aria-labelledby="titulo-caso">
+      <div class="contenedor">
+        <span class="volanta-clara">Clientes</span>
+        <h2 id="titulo-caso">Con quiénes trabajamos</h2>
+        <p class="intro">Acompañamos a pymes y empresas familiares en sus decisiones de procesos, información y tecnología.</p>
+        <article class="cliente">
+          <header class="cliente-cab">
+            <div>
+              <h3 class="cliente-nombre">Orann</h3>
+              <p class="cliente-meta">Alimentos naturales · Empresa familiar desde 1994</p>
+            </div>
+            <span class="chip">Proyecto en curso</span>
+          </header>
+          <div class="cliente-intro">
+            <p class="cliente-desc">Una empresa familiar de alimentos saludables, con más de 30 años de historia, que busca ordenar y documentar su forma de trabajar.</p>
+            <figure class="imagen"><img src="https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&q=75&w=1200" srcset="https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&q=75&w=600 600w, https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&q=75&w=900 900w, https://images.unsplash.com/photo-1633360821154-1935fb5671e6?auto=format&fit=crop&q=75&w=1400 1400w" sizes="(max-width: 760px) 100vw, 50vw" alt="Barrita de granola sobre una mesa" loading="lazy" style="aspect-ratio:16 / 10" onerror="this.parentNode.remove()"></figure>
+          </div>
+        <ul class="caso-columnas">
+          <li>
+            <h3>El desafío</h3>
+            <p>Buena parte del funcionamiento de la empresa depende de lo que saben sus fundadores y no está documentado.</p>
+          </li>
+          <li>
+            <h3>Nuestro enfoque</h3>
+            <p>Analizamos su arquitectura empresarial, definimos la organización destino y evaluamos cuatro escenarios. Elegimos una implementación SaaS modular, empezando por la gestión documental.</p>
+          </li>
+          <li>
+            <h3>El avance</h3>
+            <p>Completamos nueve de las once etapas. Recomendamos Google Workspace como repositorio de procesos y un documentador por voz con inteligencia artificial para cargarlo. La recomendación final se presenta en diciembre de 2026.</p>
+          </li>
+        </ul>
+        <ul class="caso-cifras">
+          <li><strong>9</strong><span>de 11 etapas completas</span></li>
+          <li><strong>102</strong><span>ítems evaluados en la matriz RFP</span></li>
+          <li><strong>87,9 %</strong><span>de cumplimiento de la solución recomendada</span></li>
+          <li><strong>USD 765</strong><span>de costo total a tres años</span></li>
+        </ul>
+          <a href="orann.html" class="boton">Ver el proyecto etapa por etapa</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= Contacto ================= -->
+    <section id="contacto" class="seccion clara contacto" aria-labelledby="titulo-contacto">
+      <div class="contenedor">
+        <div class="cabecera">
+          <h2 id="titulo-contacto">Hablemos</h2>
+          <p class="intro">¿Tu empresa está frente a una venta, una sucesión o una decisión de tecnología? Contanos tu situación y te respondemos para coordinar una primera conversación.</p>
+        </div>
+        <div class="contacto-grilla">
+          <form class="formulario" id="form-contacto" novalidate>
+            <div class="campo-doble">
+              <label>Nombre<input type="text" name="nombre" autocomplete="name" required></label>
+              <label>Empresa<input type="text" name="empresa" autocomplete="organization"></label>
+            </div>
+            <label>Email<input type="email" name="email" autocomplete="email" required></label>
+            <label>¿En qué te podemos ayudar?<textarea name="mensaje" rows="5" required></textarea></label>
+            <button type="submit" class="boton">Enviar consulta</button>
+            <p class="form-nota" id="form-nota" role="status">Al enviar, se abre tu programa de correo con el mensaje listo para mandar.</p>
+          </form>
+          <div class="datos">
+            <ul class="datos-lista">
+              <li>
+                <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+                <div><strong>Email</strong><a href="mailto:cauce.consultora1660@gmail.com">cauce.consultora1660@gmail.com</a></div>
+              </li>
+              <li>
+                <span class="icono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+                <div><strong>Dónde estamos</strong><span>Av. Scalabrini Ortiz y Av. Santa Fe, Palermo, Ciudad de Buenos Aires</span></div>
+              </li>
+            </ul>
+            <div class="mapa">
+              <iframe title="Mapa: Av. Scalabrini Ortiz y Av. Santa Fe, Palermo" src="https://www.google.com/maps?q=Av.+Ra%C3%BAl+Scalabrini+Ortiz+y+Av.+Santa+Fe,+Palermo,+Buenos+Aires&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      <span>Cauce Consultora · Sistemas de información y arquitectura empresarial</span>
+      <span class="creditos">Fotos: <a href="https://unsplash.com">Unsplash</a> · © 2026</span>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.seccion .cabecera, .contacto-grilla, .desafios li, .servicio, .fase, .principios li, .identidad li, .equipo li, .cliente, .caso-columnas li, .caso-cifras li, .proposito blockquote, .marcos');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      els.forEach(function (e, i) { e.classList.add('revela'); e.style.transitionDelay = (i % 3) * 0.08 + 's'; });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); } });
+      }, { threshold: 0.15 });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+  <script>
+    (function () {
+      var f = document.getElementById('form-contacto'); if (!f) return;
+      var nota = document.getElementById('form-nota');
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var ok = true;
+        ['nombre', 'email', 'mensaje'].forEach(function (n) {
+          var el = f.elements[n]; var valido = el.value.trim() !== '' && (n !== 'email' || /.+@.+\..+/.test(el.value));
+          el.setAttribute('aria-invalid', valido ? 'false' : 'true'); if (!valido) ok = false;
+        });
+        if (!ok) { nota.textContent = 'Completá tu nombre, un email válido y tu consulta.'; nota.classList.add('error'); return; }
+        nota.classList.remove('error');
+        var asunto = 'Consulta desde la web' + (f.elements.empresa.value.trim() ? ' – ' + f.elements.empresa.value.trim() : '');
+        var cuerpo = f.elements.mensaje.value.trim() + '\n\n' + f.elements.nombre.value.trim() + (f.elements.empresa.value.trim() ? ' (' + f.elements.empresa.value.trim() + ')' : '') + '\n' + f.elements.email.value.trim();
+        window.location.href = 'mailto:cauce.consultora1660@gmail.com?subject=' + encodeURIComponent(asunto) + '&body=' + encodeURIComponent(cuerpo);
+        nota.textContent = 'Listo: se abrió tu programa de correo con el mensaje. Solo falta enviarlo.';
+      });
+    })();
+  </script>
+</body>
+</html>
